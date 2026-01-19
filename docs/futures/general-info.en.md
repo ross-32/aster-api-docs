@@ -33,7 +33,7 @@
 }
 ```
 
-* Specific error codes and messages defined in [Error Codes](#error-codes).
+* Specific error codes and messages defined in **Error Codes** Page.
 
 ### General Information on Endpoints
 
