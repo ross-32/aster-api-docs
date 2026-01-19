@@ -1,0 +1,113 @@
+site_name: Aster API Docs
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: zh
+          name: 中文
+          build: true
+          nav_translations:
+            Spot: 现货
+            Futures: 合约
+            Futures v3: 合约 v3
+            Changelog: 更新日志
+            Demo: Demo
+            Overview: 概览
+            General Info: 基本信息
+            Market Data : 行情数据
+            Spot Account & Trading: 现货账户与交易
+            Futures Account & Trading: 合约账户与交易
+            WebSocket Market Data: WebSocket 行情数据推送
+            WebSocket Account Info: WebSocket 账户信息推送
+            Error Codes: 错误码 
+            Aster Code: Aster Code
+            Integration Flow: 对接流程
+            Authentication: 鉴权方式
+            Endpoints: 接口列表
+            Demo: Demo
+            Changelog: 更新日志
+            Upcoming Changes: 即将发布
+
+markdown_extensions:
+  - toc:
+      toc_depth: 3
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+
+  - Futures v3:
+      - General Info: futures-v3/general-info.md
+      - Market Data: futures-v3/market-data.md
+      - Futures Account & Trading: futures-v3/account&trades.md
+      - WebSocket Market Data: futures-v3/websocket-market-streams.md
+      - WebSocket Account Info: futures-v3/user-data-streams.md
+      - Error Codes: futures-v3/error-codes.md
+      
+  - Futures: 
+      - General Info: futures/general-info.md
+      - Market Data: futures/market-data.md
+      - Futures Account & Trading: futures/account&trades.md
+      - WebSocket Market Data: futures/websocket-market-streams.md
+      - WebSocket Account Info: futures/user-data-streams.md
+      - Error Codes: futures/error-codes.md
+
+  - Spot: 
+      - Overview: spot/spot-api-overview.md
+      - Market Data: spot/market-data-api.md
+      - Spot Account & Trading: spot/spot-account-and-trading-api.md
+      - WebSocket Market Data: spot/websocket-market-data.md
+      - WebSocket Account Info: spot/websocket-account-info.md
+      - Error Codes: spot/error-codes.md
+
+  - Aster Code: 
+      - Integration Flow: asterCode/integration-flow.md
+      - Authentication: asterCode/authentication.md
+      - Endpoints: asterCode/endpoints.md
+
+  - Demo: demo/demo.md
+
+  - Changelog: 
+      - Upcoming Changes: changelog/upcoming-changes.md
+      - 2026-1-21: changelog/2026-1-21.md
