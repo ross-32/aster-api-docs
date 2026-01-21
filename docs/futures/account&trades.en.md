@@ -1,10 +1,10 @@
-## Overview
+## **Overview**
 
 <aside class="warning">
 Considering the possible data latency from RESTful endpoints during an extremely volatile market, it is highly recommended to get the order status, position, etc from the Websocket user data stream.
 </aside>
 
-## Change Position Mode(TRADE)
+## **Change Position Mode(TRADE)**
 
 > **Response:**
 
@@ -33,7 +33,7 @@ recvWindow | LONG   | NO       |
 timestamp  | LONG   | YES      |
 
 
-## Get Current Position Mode(USER_DATA)
+## **Get Current Position Mode(USER_DATA)**
 
 > **Response:**
 
@@ -60,7 +60,7 @@ recvWindow | LONG   | NO       |
 timestamp  | LONG   | YES      |
 
 
-## Change Multi-Assets Mode (TRADE)
+## **Change Multi-Assets Mode (TRADE)**
 
 > **Response:**
 
@@ -90,7 +90,7 @@ timestamp  | LONG   | YES      |
 
 
 
-## Get Current Multi-Assets Mode (USER_DATA)
+## **Get Current Multi-Assets Mode (USER_DATA)**
 
 > **Response:**
 
@@ -117,7 +117,7 @@ recvWindow | LONG   | NO       |
 timestamp  | LONG   | YES      |
 
 
-## New Order  (TRADE)
+## **New Order  (TRADE)**
 
 
 > **Response:**
@@ -229,7 +229,7 @@ Type | Additional mandatory parameters
 	* In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
 
 
-## Place Multiple Orders  (TRADE)
+## **Place Multiple Orders  (TRADE)**
 
 
 > **Response:**
@@ -307,7 +307,7 @@ newOrderRespType | ENUM    | NO       | "ACK", "RESULT", default "ACK"
 * Batch orders are processed concurrently, and the order of matching is not guaranteed.
 * The order of returned contents for batch orders is the same as the order of the order list.
 
-## Transfer Between Futures And Spot (USER_DATA)
+## **Transfer Between Futures And Spot (USER_DATA)**
 
 > **Response:**
 
@@ -342,7 +342,7 @@ Notes:
 	 SPOT_FUTURE  (spot converted to futures)
 
 
-## Query Order (USER_DATA)
+## **Query Order (USER_DATA)**
 
 
 > **Response:**
@@ -405,7 +405,7 @@ Notes:
 
 
 
-## Cancel Order (TRADE)
+## **Cancel Order (TRADE)**
 
 > **Response:**
 
@@ -458,7 +458,7 @@ timestamp | LONG | YES |
 Either `orderId` or `origClientOrderId` must be sent.
 
 
-## Cancel All Open Orders (TRADE)
+## **Cancel All Open Orders (TRADE)**
 
 > **Response:**
 
@@ -485,7 +485,7 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 
-## Cancel Multiple Orders (TRADE)
+## **Cancel Multiple Orders (TRADE)**
 
 > **Response:**
 
@@ -544,7 +544,7 @@ Either `orderIdList` or `origClientOrderIdList ` must be sent.
 
 
 
-## Auto-Cancel All Open Orders (TRADE)
+## **Auto-Cancel All Open Orders (TRADE)**
 
 > **Response:**
 
@@ -587,7 +587,7 @@ timestamp | LONG | YES |
 
 
 
-## Query Current Open Order (USER_DATA)
+## **Query Current Open Order (USER_DATA)**
 
 > **Response:**
 
@@ -643,7 +643,7 @@ timestamp  | LONG   | YES      |
 
 
 
-## Current All Open Orders (USER_DATA)
+## **Current All Open Orders (USER_DATA)**
 
 > **Response:**
 
@@ -698,7 +698,7 @@ timestamp | LONG | YES |
 
 * If the symbol is not sent, orders for all symbols will be returned in an array.
 
-## All Orders (USER_DATA)
+## **All Orders (USER_DATA)**
 
 
 > **Response:**
@@ -766,7 +766,7 @@ timestamp | LONG | YES |
 
 
 
-## Futures Account Balance V2 (USER_DATA)
+## **Futures Account Balance V2 (USER_DATA)**
 
 > **Response:**
 
@@ -803,7 +803,7 @@ timestamp | LONG | YES
 
 
 
-## Account Information V4 (USER_DATA)
+## **Account Information V4 (USER_DATA)**
 
 
 > **Response:**
@@ -906,7 +906,7 @@ timestamp | LONG | YES |
 
 
 
-## Change Initial Leverage (TRADE)
+## **Change Initial Leverage (TRADE)**
 
 > **Response:**
 
@@ -937,7 +937,7 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 
-## Change Margin Type (TRADE)
+## **Change Margin Type (TRADE)**
 
 > **Response:**
 
@@ -966,7 +966,7 @@ recvWindow | LONG | NO
 timestamp | LONG | YES
 
 
-## Modify Isolated Position Margin (TRADE)
+## **Modify Isolated Position Margin (TRADE)**
 
 > **Response:**
 
@@ -1001,7 +1001,7 @@ timestamp | LONG | YES
 * Only for isolated symbol
 
 
-## Get Position Margin Change History (TRADE)
+## **Get Position Margin Change History (TRADE)**
 
 > **Response:**
 
@@ -1050,7 +1050,7 @@ timestamp | LONG | YES
 
 
 
-## Position Information V2 (USER_DATA)
+## **Position Information V2 (USER_DATA)**
 
 
 > **Response:**
@@ -1136,7 +1136,7 @@ Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and ac
 
 
 
-## Account Trade List (USER_DATA)
+## **Account Trade List (USER_DATA)**
 
 
 > **Response:**
@@ -1188,7 +1188,7 @@ timestamp | LONG | YES |
 * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
 
 
-## Get Income History(USER_DATA)
+## **Get Income History(USER_DATA)**
 
 
 > **Response:**
@@ -1242,7 +1242,7 @@ timestamp|LONG|YES|
 * "trandId" is unique in the same incomeType for a user
 
 
-## Notional and Leverage Brackets (USER_DATA)
+## **Notional and Leverage Brackets (USER_DATA)**
 
 
 > **Response:**
@@ -1303,7 +1303,7 @@ timestamp|LONG|YES|
 
 
 
-## Position ADL Quantile Estimation (USER_DATA)
+## **Position ADL Quantile Estimation (USER_DATA)**
 
 
 > **Response:**
@@ -1360,7 +1360,7 @@ timestamp|LONG|YES|
 
 
 
-## User's Force Orders (USER_DATA)
+## **User's Force Orders (USER_DATA)**
 
 
 > **Response:**
@@ -1439,7 +1439,7 @@ timestamp     | LONG   | YES       |
 
 
 
-## User Commission Rate (USER_DATA)
+## **User Commission Rate (USER_DATA)**
 
 > **Response:**
 

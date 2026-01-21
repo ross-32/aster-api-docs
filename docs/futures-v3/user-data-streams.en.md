@@ -1,4 +1,4 @@
-## Overview
+## **Overview**
 
 * The base API endpoint is: **https://fapi.asterdex.com**
 * A User Data Stream `listenKey` is valid for 60 minutes after creation.
@@ -10,7 +10,7 @@
 * User data stream payloads are **not guaranteed** to be in order during heavy periods; **make sure to order your updates using E**
 * A single connection to **fstream.asterdex.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark
 
-## Start User Data Stream (USER_STREAM)
+## **Start User Data Stream (USER_STREAM)**
 
 > **Response:**
 
@@ -31,7 +31,7 @@ Start a new user data stream. The stream will close after 60 minutes unless a ke
 
 None
 
-## Keepalive User Data Stream (USER_STREAM)
+## **Keepalive User Data Stream (USER_STREAM)**
 
 > **Response:**
 
@@ -50,7 +50,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 None
 
-## Close User Data Stream (USER_STREAM)
+## **Close User Data Stream (USER_STREAM)**
 
 > **Response:**
 
@@ -69,7 +69,7 @@ Close out a user data stream.
 
 None
 
-## Event: User Data Stream Expired
+## **Event: User Data Stream Expired**
 
 > **Payload:**
 
@@ -88,7 +88,7 @@ When the `listenKey` used for the user data stream turns expired, this event wil
 * This event will be received only when a valid `listenKey` in connection got expired.
 * No more user data event will be updated after this event received until a new valid `listenKey` used.
 
-## Event: Margin Call
+## **Event: Margin Call**
 
 > **Payload:**
 
@@ -116,7 +116,7 @@ When the `listenKey` used for the user data stream turns expired, this event wil
 * This message is only used as risk guidance information and is not recommended for investment strategies.
 * In the case of a highly volatile market, there may be the possibility that the user's position has been liquidated at the same time when this stream is pushed out.
 
-## Event: Balance and Position Update
+## **Event: Balance and Position Update**
 
 > **Payload:**
 
@@ -208,7 +208,7 @@ Event type is `ACCOUNT_UPDATE`.
   * AUTO_EXCHANGE
 * The field "bc" represents the balance change except for PnL and commission.
 
-## Event: Order Update
+## **Event: Order Update**
 
 > **Payload:**
 
@@ -303,7 +303,7 @@ event type is `ORDER_TRADE_UPDATE`.
 * MARK_PRICE
 * CONTRACT_PRICE
 
-## Event: Account Configuration Update previous Leverage Update
+## **Event: Account Configuration Update previous Leverage Update**
 
 > **Payload:**
 

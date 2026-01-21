@@ -1,4 +1,4 @@
-## Test Connectivity
+## **Test Connectivity**
 
 > **Response:**
 
@@ -16,7 +16,7 @@ Test connectivity to the Rest API.
 **Parameters:**
 NONE
 
-## Check Server Time
+## **Check Server Time**
 
 > **Response:**
 
@@ -36,7 +36,7 @@ Test connectivity to the Rest API and get the current server time.
 **Parameters:**
 NONE
 
-## Exchange Information
+## **Exchange Information**
 
 > **Response:**
 
@@ -167,7 +167,7 @@ Current exchange trading rules and symbol information
 **Parameters:**
 NONE
 
-## Order Book
+## **Order Book**
 
 > **Response:**
 
@@ -211,7 +211,7 @@ Adjusted based on the limit:
 | symbol | STRING | YES       |                                                           |
 | limit  | INT    | NO        | Default 500; Valid limits:[5, 10, 20, 50, 100, 500, 1000] |
 
-## Recent Trades List
+## **Recent Trades List**
 
 > **Response:**
 
@@ -244,7 +244,7 @@ Get recent market trades
 
 * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
 
-## Old Trades Lookup (MARKET_DATA)
+## **Old Trades Lookup (MARKET_DATA)**
 
 > **Response:**
 
@@ -278,7 +278,7 @@ Get older market historical trades.
 
 * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
 
-## Compressed/Aggregate Trades List
+## **Compressed/Aggregate Trades List**
 
 > **Response:**
 
@@ -317,7 +317,7 @@ Get compressed, aggregate market trades. Market trades that fill at the time, fr
 * If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
 * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
 
-## Kline/Candlestick Data
+## **Kline/Candlestick Data**
 
 > **Response:**
 
@@ -367,7 +367,7 @@ Klines are uniquely identified by their open time.
 
 * If startTime and endTime are not sent, the most recent klines are returned.
 
-## Index Price Kline/Candlestick Data
+## **Index Price Kline/Candlestick Data**
 
 > **Response:**
 
@@ -418,7 +418,7 @@ Klines are uniquely identified by their open time.
 
 * If startTime and endTime are not sent, the most recent klines are returned.
 
-## Mark Price Kline/Candlestick Data
+## **Mark Price Kline/Candlestick Data**
 
 > **Response:**
 
@@ -469,7 +469,7 @@ Klines are uniquely identified by their open time.
 
 * If startTime and endTime are not sent, the most recent klines are returned.
 
-## Mark Price
+## **Mark Price**
 
 > **Response:**
 
@@ -516,7 +516,7 @@ Mark Price and Funding Rate
 | ------ | ------ | --------- | ----------- |
 | symbol | STRING | NO        |             |
 
-## Get Funding Rate History
+## **Get Funding Rate History**
 
 > **Response:**
 
@@ -553,7 +553,7 @@ Mark Price and Funding Rate
 * If the number of data between `startTime` and `endTime` is larger than `limit`, return as `startTime` + `limit`.
 * In ascending order.
 
-## 24hr Ticker Price Change Statistics
+## **24hr Ticker Price Change Statistics**
 
 > **Response:**
 
@@ -622,7 +622,7 @@ Mark Price and Funding Rate
 
 * If the symbol is not sent, tickers for all symbols will be returned in an array.
 
-## Symbol Price Ticker
+## **Symbol Price Ticker**
 
 > **Response:**
 
@@ -662,7 +662,7 @@ Latest price for a symbol or symbols.
 
 * If the symbol is not sent, prices for all symbols will be returned in an array.
 
-## Symbol Order Book Ticker
+## **Symbol Order Book Ticker**
 
 > **Response:**
 

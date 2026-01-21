@@ -1,4 +1,4 @@
-## 概览
+## **概览**
 
 > error JSON payload:
  
@@ -12,7 +12,7 @@
 错误由两部分组成：错误代码和消息。 代码是通用的，但是消息可能会有所不同。
 
 
-## 10xx - 常规服务器或网络问题
+## **10xx - 常规服务器或网络问题**
 > -1000 UNKNOWN
  * An unknown error occured while processing the request.
  * 处理请求时发生未知错误。
@@ -84,7 +84,7 @@
  * 参数里面的开始时间在结束时间之后
 
 
-## 11xx - 请求报错
+## **11xx - 请求报错**
 > -1100 ILLEGAL_CHARS
  * Illegal characters found in a parameter.
  * 在参数中发现非法字符。
@@ -194,7 +194,7 @@
  * 无效的 newOrderRespType。
 
 
-## 20xx - 进程报错
+## **20xx - 进程报错**
 > -2010 NEW_ORDER_REJECTED
  * NEW_ORDER_REJECTED
  * 新订单被拒绝
@@ -263,7 +263,7 @@
  * Leverage is smaller than permitted: insufficient margin balance.
  * 调整初始杠杆过低，导致可用余额不足 
 
-## 40xx - 其他报错
+## **40xx - 其他报错**
 > -4000 INVALID_ORDER_STATUS
  * Invalid order status.
  * 订单状态不正确

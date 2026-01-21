@@ -1,4 +1,4 @@
-## Test Connectivity
+## **Test Connectivity**
 
 
 > **Response:**
@@ -22,7 +22,7 @@ NONE
 
 
 
-## Check Server Time
+## **Check Server Time**
 
 > **Response:**
 
@@ -45,7 +45,7 @@ Test connectivity to the Rest API and get the current server time.
 NONE
 
 
-## Exchange Information
+## **Exchange Information**
 
 > **Response:**
 
@@ -183,7 +183,7 @@ NONE
 
 
 
-## Order Book
+## **Order Book**
 
 
 > **Response:**
@@ -234,7 +234,7 @@ limit | INT | NO | Default 500; Valid limits:[5, 10, 20, 50, 100, 500, 1000]
 
 
 
-## Recent Trades List
+## **Recent Trades List**
 
 > **Response:**
 
@@ -270,7 +270,7 @@ limit | INT | NO | Default 500; max 1000.
 * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
 
 
-## Old Trades Lookup (MARKET_DATA)
+## **Old Trades Lookup (MARKET_DATA)**
 
 > **Response:**
 
@@ -307,7 +307,7 @@ fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
 * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
 
 
-## Compressed/Aggregate Trades List
+## **Compressed/Aggregate Trades List**
 
 > **Response:**
 
@@ -350,7 +350,7 @@ limit | INT | NO | Default 500; max 1000.
 
 
 
-## Kline/Candlestick Data
+## **Kline/Candlestick Data**
 
 
 > **Response:**
@@ -403,7 +403,7 @@ limit | INT | NO | Default 500; max 1500.
 * If startTime and endTime are not sent, the most recent klines are returned.
 
 
-## Index Price Kline/Candlestick Data
+## **Index Price Kline/Candlestick Data**
 
 > **Response:**
 
@@ -456,7 +456,7 @@ limit     | INT    | NO       |  Default 500; max 1500.
 * If startTime and endTime are not sent, the most recent klines are returned.
 
 
-## Mark Price Kline/Candlestick Data
+## **Mark Price Kline/Candlestick Data**
 
 > **Response:**
 
@@ -510,7 +510,7 @@ limit     | INT    | NO       |  Default 500; max 1500.
 * If startTime and endTime are not sent, the most recent klines are returned.
 
 
-## Mark Price
+## **Mark Price**
 
 
 > **Response:**
@@ -563,7 +563,7 @@ symbol | STRING | NO |
 
 
 
-## Get Funding Rate History
+## **Get Funding Rate History**
 
 > **Response:**
 
@@ -604,7 +604,7 @@ limit | INT | NO | Default 100; max 1000
 * If the number of data between `startTime` and `endTime` is larger than `limit`, return as `startTime` + `limit`.
 * In ascending order.
 
-## Get Funding Rate Config
+## **Get Funding Rate Config**
 
 > **Response:**
 
@@ -645,7 +645,7 @@ symbol | STRING | NO |
 
 
 
-## 24hr Ticker Price Change Statistics
+## **24hr Ticker Price Change Statistics**
 
 > **Response:**
 
@@ -718,7 +718,7 @@ symbol | STRING | NO |
 
 
 
-## Symbol Price Ticker
+## **Symbol Price Ticker**
 
 > **Response:**
 
@@ -763,7 +763,7 @@ symbol | STRING | NO |
 
 
 
-## Symbol Order Book Ticker
+## **Symbol Order Book Ticker**
 
 
 > **Response:**

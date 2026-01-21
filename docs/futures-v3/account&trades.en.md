@@ -1,10 +1,10 @@
-## Overview
+## **Overview**
 
 <aside class="warning">
 Considering the possible data latency from RESTful endpoints during an extremely volatile market, it is highly recommended to get the order status, position, etc from the Websocket user data stream.
 </aside>
 
-## Change Position Mode(TRADE)
+## **Change Position Mode(TRADE)**
 
 > **Response:**
 
@@ -30,7 +30,7 @@ Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
 | recvWindow       | LONG   | NO        |                                           |
 | timestamp        | LONG   | YES       |                                           |
 
-## Get Current Position Mode(USER_DATA)
+## **Get Current Position Mode(USER_DATA)**
 
 > **Response:**
 
@@ -54,7 +54,7 @@ Get user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
 | recvWindow | LONG | NO        |             |
 | timestamp  | LONG | YES       |             |
 
-## Change Multi-Assets Mode (TRADE)
+## **Change Multi-Assets Mode (TRADE)**
 
 > **Response:**
 
@@ -80,7 +80,7 @@ Change user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***E
 | recvWindow        | LONG   | NO        |                                                       |
 | timestamp         | LONG   | YES       |                                                       |
 
-## Get Current Multi-Assets Mode (USER_DATA)
+## **Get Current Multi-Assets Mode (USER_DATA)**
 
 > **Response:**
 
@@ -104,7 +104,7 @@ Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***Ever
 | recvWindow | LONG | NO        |             |
 | timestamp  | LONG | YES       |             |
 
-## New Order  (TRADE)
+## **New Order  (TRADE)**
 
 > **Response:**
 
@@ -212,7 +212,7 @@ Additional mandatory parameters based on `type`:
   * Cannot be used with `reduceOnly` parameter
   * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
 
-## Place Multiple Orders  (TRADE)
+## **Place Multiple Orders  (TRADE)**
 
 > **Response:**
 
@@ -287,7 +287,7 @@ Additional mandatory parameters based on `type`:
 * The order of returned contents for batch orders is the same as the order of the order list.
 
 
-## Transfer Between Futures And Spot (USER_DATA)
+## **Transfer Between Futures And Spot (USER_DATA)**
 
 > **Response:**
 
@@ -322,7 +322,7 @@ Notes:
 	 SPOT_FUTURE  (spot converted to futures)
 
 
-## Query Order (USER_DATA)
+## **Query Order (USER_DATA)**
 
 > **Response:**
 
@@ -380,7 +380,7 @@ Notes:
 
 * Either `orderId` or `origClientOrderId` must be sent.
 
-## Cancel Order (TRADE)
+## **Cancel Order (TRADE)**
 
 > **Response:**
 
@@ -430,7 +430,7 @@ Cancel an active order.
 
 Either `orderId` or `origClientOrderId` must be sent.
 
-## Cancel All Open Orders (TRADE)
+## **Cancel All Open Orders (TRADE)**
 
 > **Response:**
 
@@ -454,7 +454,7 @@ Either `orderId` or `origClientOrderId` must be sent.
 | recvWindow | LONG   | NO        |             |
 | timestamp  | LONG   | YES       |             |
 
-## Cancel Multiple Orders (TRADE)
+## **Cancel Multiple Orders (TRADE)**
 
 > **Response:**
 
@@ -508,7 +508,7 @@ Either `orderId` or `origClientOrderId` must be sent.
 
 Either `orderIdList` or `origClientOrderIdList ` must be sent.
 
-## Auto-Cancel All Open Orders (TRADE)
+## **Auto-Cancel All Open Orders (TRADE)**
 
 > **Response:**
 
@@ -542,7 +542,7 @@ Cancel all open orders of the specified symbol at the end of the specified count
   If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
 * The system will check all countdowns **approximately every 10 milliseconds**, so please note that sufficient redundancy should be considered when using this function. We do not recommend setting the countdown time to be too precise or too small.
 
-## Query Current Open Order (USER_DATA)
+## **Query Current Open Order (USER_DATA)**
 
 > **Response:**
 
@@ -591,7 +591,7 @@ Cancel all open orders of the specified symbol at the end of the specified count
 * Either`orderId` or `origClientOrderId` must be sent
 * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
 
-## Current All Open Orders (USER_DATA)
+## **Current All Open Orders (USER_DATA)**
 
 > **Response:**
 
@@ -642,7 +642,7 @@ Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 * If the symbol is not sent, orders for all symbols will be returned in an array.
 
-## All Orders (USER_DATA)
+## **All Orders (USER_DATA)**
 
 > **Response:**
 
@@ -705,7 +705,7 @@ Get all account orders; active, canceled, or filled.
 * If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
 * The query time period must be less then 7 days( default as the recent 7 days).
 
-## Futures Account Balance v3 (USER_DATA)
+## **Futures Account Balance v3 (USER_DATA)**
 
 > **Response:**
 
@@ -737,7 +737,7 @@ Get all account orders; active, canceled, or filled.
 | recvWindow | LONG | NO        |             |
 | timestamp  | LONG | YES       |             |
 
-## Account Information v3 (USER_DATA)
+## **Account Information v3 (USER_DATA)**
 
 > **Response:**
 
@@ -829,7 +829,7 @@ Get current account information.
 | recvWindow | LONG | NO        |             |
 | timestamp  | LONG | YES       |             |
 
-## Change Initial Leverage (TRADE)
+## **Change Initial Leverage (TRADE)**
 
 > **Response:**
 
@@ -857,7 +857,7 @@ Change user's initial leverage of specific symbol market.
 | recvWindow | LONG   | NO        |                                            |
 | timestamp  | LONG   | YES       |                                            |
 
-## Change Margin Type (TRADE)
+## **Change Margin Type (TRADE)**
 
 > **Response:**
 
@@ -882,7 +882,7 @@ Change user's initial leverage of specific symbol market.
 | recvWindow | LONG   | NO        |                   |
 | timestamp  | LONG   | YES       |                   |
 
-## Modify Isolated Position Margin (TRADE)
+## **Modify Isolated Position Margin (TRADE)**
 
 > **Response:**
 
@@ -913,7 +913,7 @@ Change user's initial leverage of specific symbol market.
 
 * Only for isolated symbol
 
-## Get Position Margin Change History (TRADE)
+## **Get Position Margin Change History (TRADE)**
 
 > **Response:**
 
@@ -955,7 +955,7 @@ Change user's initial leverage of specific symbol market.
 | recvWindow | LONG   | NO        |                                                   |
 | timestamp  | LONG   | YES       |                                                   |
 
-## Position Information v3 (USER_DATA)
+## **Position Information v3 (USER_DATA)**
 
 > **Response:**
 
@@ -1036,7 +1036,7 @@ Get current position information.
 **Note**
 Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
 
-## Account Trade List (USER_DATA)
+## **Account Trade List (USER_DATA)**
 
 > **Response:**
 
@@ -1084,7 +1084,7 @@ Get trades for a specific account and symbol.
 * The time between `startTime` and `endTime` cannot be longer than 7 days.
 * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
 
-## Get Income History(USER_DATA)
+## **Get Income History(USER_DATA)**
 
 > **Response:**
 
@@ -1134,7 +1134,7 @@ Get trades for a specific account and symbol.
 * If `incomeType ` is not sent, all kinds of flow will be returned
 * "trandId" is unique in the same incomeType for a user
 
-## Notional and Leverage Brackets (USER_DATA)
+## **Notional and Leverage Brackets (USER_DATA)**
 
 > **Response:**
 
@@ -1187,7 +1187,7 @@ Get trades for a specific account and symbol.
 | recvWindow | LONG   | NO        |             |
 | timestamp  | LONG   | YES       |             |
 
-## Position ADL Quantile Estimation (USER_DATA)
+## **Position ADL Quantile Estimation (USER_DATA)**
 
 > **Response:**
 
@@ -1236,7 +1236,7 @@ Get trades for a specific account and symbol.
   * "HEDGE" as a sign will be returned instead of "BOTH";
   * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
 
-## User's Force Orders (USER_DATA)
+## **User's Force Orders (USER_DATA)**
 
 > **Response:**
 
@@ -1308,7 +1308,7 @@ Get trades for a specific account and symbol.
 * If "autoCloseType" is not sent, orders with both of the types will be returned
 * If "startTime" is not sent, data within 7 days before "endTime" can be queried
 
-## User Commission Rate (USER_DATA)
+## **User Commission Rate (USER_DATA)**
 
 > **Response:**
 

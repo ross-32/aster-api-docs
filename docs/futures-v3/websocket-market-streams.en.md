@@ -1,4 +1,4 @@
-## Overview
+## **Overview**
 * The baseurl for websocket is **wss://fstream.asterdex.com**
 * Streams can be access either in a single raw stream or a combined stream
 * Raw streams are accessed at **/ws/\<streamName\>**
@@ -12,7 +12,7 @@
 * A single connection can listen to a maximum of **200** streams.
 * Considering the possible data latency from RESTful endpoints during an extremely volatile market, it is highly recommended to get the order status, position, etc from the Websocket user data stream.
 
-## Live Subscribing/Unsubscribing to streams
+## **Live Subscribing/Unsubscribing to streams**
 
 * The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
 * The `id` used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.
@@ -144,7 +144,7 @@ The combined property is set to `false` when connecting using `/ws/` ("raw strea
 | {"code": 2, "msg": "Invalid request: missing field`method` at line 1 column 73"}                                                                                               | `method` was not provided in the data                                                               |
 | {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"}                                                                                                           | JSON data sent has incorrect syntax.                                                                |
 
-## Aggregate Trade Streams
+## **Aggregate Trade Streams**
 
 > **Payload:**
 
@@ -172,7 +172,7 @@ The Aggregate Trade Streams push market trade information that is aggregated for
 
 * Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
 
-## Mark Price Stream
+## **Mark Price Stream**
 
 > **Payload:**
 
@@ -196,7 +196,7 @@ Mark price and funding rate for a single symbol pushed every 3 seconds or every 
 
 **Update Speed:** 3000ms or 1000ms
 
-## Mark Price Stream for All market
+## **Mark Price Stream for All market**
 
 > **Payload:**
 
@@ -222,7 +222,7 @@ Mark price and funding rate for all symbols pushed every 3 seconds or every seco
 
 **Update Speed:** 3000ms or 1000ms
 
-## Kline/Candlestick Streams
+## **Kline/Candlestick Streams**
 
 > **Payload:**
 
@@ -280,7 +280,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 **Update Speed:** 250ms
 
-## Individual Symbol Mini Ticker Stream
+## **Individual Symbol Mini Ticker Stream**
 
 > **Payload:**
 
@@ -305,7 +305,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 **Update Speed:** 500ms
 
-## All Market Mini Tickers Stream
+## **All Market Mini Tickers Stream**
 
 > **Payload:**
 
@@ -332,7 +332,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 **Update Speed:** 1000ms
 
-## Individual Symbol Ticker Streams
+## **Individual Symbol Ticker Streams**
 
 > **Payload:**
 
@@ -366,7 +366,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 **Update Speed:** 500ms
 
-## All Market Tickers Streams
+## **All Market Tickers Streams**
 
 > **Payload:**
 
@@ -402,7 +402,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 **Update Speed:** 1000ms
 
-## Individual Symbol Book Ticker Streams
+## **Individual Symbol Book Ticker Streams**
 
 > **Payload:**
 
@@ -426,7 +426,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 
 **Update Speed:** Real-time
 
-## All Book Tickers Stream
+## **All Book Tickers Stream**
 
 > **Payload:**
 
@@ -442,7 +442,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for al
 
 **Update Speed:** Real-time
 
-## Liquidation Order Streams
+## **Liquidation Order Streams**
 
 > **Payload:**
 
@@ -478,7 +478,7 @@ For each symbol，only the latest one liquidation order within 1000ms will be pu
 
 **Update Speed:** 1000ms
 
-## All Market Liquidation Order Streams
+## **All Market Liquidation Order Streams**
 
 > **Payload:**
 
@@ -514,7 +514,7 @@ For each symbol，only the latest one liquidation order within 1000ms will be pu
 
 **Update Speed:** 1000ms
 
-## Partial Book Depth Streams
+## **Partial Book Depth Streams**
 
 > **Payload:**
 
@@ -580,7 +580,7 @@ Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
 
 **Update Speed:** 250ms, 500ms or 100ms
 
-## Diff. Book Depth Streams
+## **Diff. Book Depth Streams**
 
 > **Payload:**
 
@@ -615,7 +615,7 @@ Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds
 
 **Update Speed:** 250ms, 500ms, 100ms
 
-## How to manage a local order book correctly
+## **How to manage a local order book correctly**
 
 1. Open a stream to **wss://fstream.asterdex.com/stream?streams=btcusdt@depth**.
 2. Buffer the events you receive from the stream. For same price, latest received update covers the previous one.

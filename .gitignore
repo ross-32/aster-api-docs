@@ -25,3 +25,6 @@ __pycache__/
 
 # Node.js 依赖（如有）
 node_modules/
+
+# 文档文件
+README.md

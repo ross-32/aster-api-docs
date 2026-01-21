@@ -1,4 +1,4 @@
-## Overview
+## **Overview**
 
 > Here is the error JSON payload:
 
@@ -12,7 +12,7 @@
 Errors consist of two parts: an error code and a message.
 Codes are universal,but messages can vary.
 
-## 10xx - General Server or Network issues
+## **10xx - General Server or Network issues**
 
 > -1000 UNKNOWN
 
@@ -91,7 +91,7 @@ Codes are universal,but messages can vary.
 
 * Start time is greater than end time.
 
-## 11xx - Request issues
+## **11xx - Request issues**
 
 > -1100 ILLEGAL_CHARS
 
@@ -207,7 +207,7 @@ Codes are universal,but messages can vary.
 
 * Invalid newOrderRespType.
 
-## 20xx - Processing Issues
+## **20xx - Processing Issues**
 
 > -2010 NEW_ORDER_REJECTED
 
@@ -277,7 +277,7 @@ Codes are universal,but messages can vary.
 
 * Leverage is smaller than permitted: insufficient margin balance.
 
-## 40xx - Filters and other Issues
+## **40xx - Filters and other Issues**
 
 > -4000 INVALID_ORDER_STATUS
 

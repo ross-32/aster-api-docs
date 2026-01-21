@@ -1,4 +1,4 @@
-## Overview
+## **Overview**
 
 * The baseurl for websocket is **wss://fstream.asterdex.com**
 * Streams can be access either in a single raw stream or a combined stream
@@ -14,7 +14,7 @@
 * Considering the possible data latency from RESTful endpoints during an extremely volatile market, it is highly recommended to get the order status, position, etc from the Websocket user data stream.
 
 
-## Live Subscribing/Unsubscribing to streams
+## **Live Subscribing/Unsubscribing to streams**
 
 * The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
 * The `id` used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.
@@ -164,7 +164,7 @@ Error Message | Description
 
 
 
-## Aggregate Trade Streams
+## **Aggregate Trade Streams**
 
 
 > **Payload:**
@@ -193,7 +193,7 @@ The Aggregate Trade Streams push market trade information that is aggregated for
 
 * Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
 
-## Mark Price Stream
+## **Mark Price Stream**
 
 > **Payload:**
 
@@ -219,7 +219,7 @@ Mark price and funding rate for a single symbol pushed every 3 seconds or every 
 
 
 
-## Mark Price Stream for All market
+## **Mark Price Stream for All market**
 
 > **Payload:**
 
@@ -247,7 +247,7 @@ Mark price and funding rate for all symbols pushed every 3 seconds or every seco
 
 
 
-## Kline/Candlestick Streams
+## **Kline/Candlestick Streams**
 
 
 > **Payload:**
@@ -307,7 +307,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 **Update Speed:** 250ms
 
 
-## Individual Symbol Mini Ticker Stream
+## **Individual Symbol Mini Ticker Stream**
 
 
 > **Payload:**
@@ -336,7 +336,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 
 
-## All Market Mini Tickers Stream
+## **All Market Mini Tickers Stream**
 
 
 > **Payload:**
@@ -366,7 +366,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 
 
-## Individual Symbol Ticker Streams
+## **Individual Symbol Ticker Streams**
 
 
 > **Payload:**
@@ -403,7 +403,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 
 
-## All Market Tickers Streams
+## **All Market Tickers Streams**
 
 
 > **Payload:**
@@ -444,7 +444,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 
 
-## Individual Symbol Book Ticker Streams
+## **Individual Symbol Book Ticker Streams**
 
 > **Payload:**
 
@@ -473,7 +473,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 
 
 
-## All Book Tickers Stream
+## **All Book Tickers Stream**
 
 > **Payload:**
 
@@ -491,7 +491,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for al
 
 
 
-## Liquidation Order Streams
+## **Liquidation Order Streams**
 
 > **Payload:**
 
@@ -529,7 +529,7 @@ For each symbol，only the latest one liquidation order within 1000ms will be pu
 
 
 
-## All Market Liquidation Order Streams
+## **All Market Liquidation Order Streams**
 
 > **Payload:**
 
@@ -570,7 +570,7 @@ For each symbol，only the latest one liquidation order within 1000ms will be pu
 
 
 
-## Partial Book Depth Streams
+## **Partial Book Depth Streams**
 
 > **Payload:**
 
@@ -641,7 +641,7 @@ Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
 
 
 
-## Diff. Book Depth Streams
+## **Diff. Book Depth Streams**
 
 
 > **Payload:**
@@ -679,7 +679,7 @@ Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds
 
 
 
-## How to manage a local order book correctly
+## **How to manage a local order book correctly**
 1. Open a stream to **wss://fstream.asterdex.com/stream?streams=btcusdt@depth**.
 2. Buffer the events you receive from the stream. For same price, latest received update covers the previous one. 
 3. Get a depth snapshot from **https://fapi.asterdex.com/fapi/v1/depth?symbol=BTCUSDT&limit=1000** .

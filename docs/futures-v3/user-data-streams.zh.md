@@ -1,4 +1,4 @@
-## 概览
+## **概览**
 
 
 * 本篇所列出REST接口的baseurl **https://fapi.asterdex.com**
@@ -13,7 +13,7 @@
 * 考虑到剧烈行情下, RESTful接口可能存在查询延迟，我们强烈建议您优先从Websocket user data stream推送的消息来获取订单，仓位等信息。
 
 
-## 生成listenKey (USER_STREAM)
+## **生成listenKey (USER_STREAM)**
 
 
 > **响应:**
@@ -38,7 +38,7 @@ POST /fapi/v3/listenKey
 None
 
 
-## 延长listenKey有效期 (USER_STREAM)
+## **延长listenKey有效期 (USER_STREAM)**
 
 
 > **响应:**
@@ -62,7 +62,7 @@ None
 
 
 
-## 关闭listenKey (USER_STREAM)
+## **关闭listenKey (USER_STREAM)**
 
 > **响应:**
 
@@ -85,7 +85,7 @@ None
 
 
 
-## listenKey 过期推送
+## **listenKey 过期推送**
 
 > **Payload:**
 
@@ -107,7 +107,7 @@ None
 
 
 
-## 追加保证金通知
+## **追加保证金通知**
 
 > **Payload:**
 
@@ -140,7 +140,7 @@ None
 
 
 
-## Balance和Position更新推送
+## **Balance和Position更新推送**
 
 > **Payload:**
 
@@ -232,7 +232,7 @@ None
 
 * 字段"bc"代表了钱包余额的改变量，即 balance change，但注意其不包含仓位盈亏及交易手续费。
 
-## 订单/交易 更新推送
+## **订单/交易 更新推送**
 
 > **Payload:**
 
@@ -326,7 +326,7 @@ None
 * GTX
 
 
-## 杠杆倍数等账户配置 更新推送
+## **杠杆倍数等账户配置 更新推送**
 
 > **Payload:**
 

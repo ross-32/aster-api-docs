@@ -1,10 +1,10 @@
-## Spot API Overview
+## **Spot API Overview**
 
 * This document lists the base URL for the API endpoints: [**https://sapi.asterdex.com**](https://sapi.asterdex.com)  
 * All API responses are in JSON format.  
 * All times and timestamps are in UNIX time, in **milliseconds**.
 
-## API Key settings
+## **API Key settings**
 
 * Many endpoints require an API Key to access.  
 * When setting the API Key, for security reasons it is recommended to set an IP access whitelist.  
@@ -44,7 +44,7 @@ The API error codes are returned in the following format:
 
 ---
 
-## Access restrictions
+## **Access restrictions**
 
 ### Basic information on access restrictions
 
@@ -81,7 +81,7 @@ You are advised to use WebSocket messages to obtain the corresponding data as mu
 
 ---
 
-## API authentication types
+## **API authentication types**
 
 * Each API has its own authentication type, which determines what kind of authentication should be performed when accessing it.  
 * The authentication type will be indicated next to each endpoint name in this document; if not specifically stated, it defaults to `NONE`.  
@@ -101,7 +101,7 @@ You are advised to use WebSocket messages to obtain the corresponding data as mu
 
 ---
 
-## SIGNED (TRADE AND USER\_DATA) Endpoint security
+## **SIGNED (TRADE AND USER\_DATA) Endpoint security**
 
 * When calling a `SIGNED` endpoint, in addition to the parameters required by the endpoint itself, you must also pass a `signature` parameter in the `query string` or `request body`.  
 * The signature uses the `HMAC SHA256` algorithm. The API-Secret corresponding to the API-KEY is used as the key for `HMAC SHA256`, and all other parameters are used as the data for the `HMAC SHA256` operation; the output is the signature.  
@@ -192,7 +192,7 @@ symbol=BNBUSDT \&side=BUY \&type=LIMIT \&timeInForce=GTC \&quantity=5 \&price=1.
 
 ---
 
-## Public API parameters
+## **Public API parameters**
 
 ### Terminology
 
@@ -307,7 +307,7 @@ ORDERS
 
 ---
 
-## Filters
+## **Filters**
 
 Filters, i.e. Filter, define a set of trading rules. There are two types: filters for trading pairs `symbol filters`, and filters for the entire exchange `exchange filters` (not supported yet)
 

@@ -1,6 +1,6 @@
 
 
-## Websocket 行情推送
+## **Websocket 行情推送**
 
 * 本篇所列出的所有wss接口的baseurl为: **wss://sstream.asterdex.com**
 * Streams有单一原始 stream 或组合 stream
@@ -11,7 +11,7 @@
 * 每个到 **sstream.asterdex.com** 的链接有效期不超过24小时，请妥善处理断线重连。
 * 每3分钟，服务端会发送ping帧，客户端应当在10分钟内回复pong帧，否则服务端会主动断开链接。允许客户端发送不成对的pong帧(即客户端可以以高于10分钟每次的频率发送pong帧保持链接)。
 
-## 实时订阅/取消数据流
+## **实时订阅/取消数据流**
 
 * 以下数据可以通过websocket发送以实现订阅或取消订阅数据流。示例如下。
 * 响应内容中的`id`是无符号整数，作为往来信息的唯一标识。
@@ -143,7 +143,7 @@
 {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"} | JSON 语法有误.
 
 
-## 归集交易流
+## **归集交易流**
 
 
 > **Payload:**
@@ -169,7 +169,7 @@
 **Update Speed:** 实时
 
 
-## 逐笔交易
+## **逐笔交易**
 
 
 > **Payload:**
@@ -191,7 +191,7 @@
 逐笔交易推送每一笔成交的信息。**成交**，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
 
 
-## K线 Streams
+## **K线 Streams**
 > **Payload:**
 ```javascript
 {
@@ -247,7 +247,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 * 1M
 
 
-## 按 Symbol 的精简Ticker
+## **按 Symbol 的精简Ticker**
 
 > **Payload:**
 ```javascript
@@ -271,7 +271,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 **Update Speed:** 1000ms
 
 
-## 全市场所有Symbol的精简Ticker
+## **全市场所有Symbol的精简Ticker**
 
 > **Payload:**
 ```javascript
@@ -288,7 +288,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 
 **Update Speed:** 1000ms
 
-## 按Symbol的完整Ticker
+## **按Symbol的完整Ticker**
 
 > **Payload:**
 ```javascript
@@ -320,7 +320,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 
 **Update Speed:** 1000ms
 
-## 全市场所有交易对的完整Ticker
+## **全市场所有交易对的完整Ticker**
 
 > **Payload:**
 ```javascript
@@ -338,7 +338,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 **Update Speed:** 1000ms
 
 
-## 按Symbol的最优挂单信息
+## **按Symbol的最优挂单信息**
 
 > **Payload:**
 ```javascript
@@ -358,7 +358,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 
 **Update Speed:** 实时
 
-## 全市场最优挂单信息
+## **全市场最优挂单信息**
 > **Payload:**
 ```javascript
 {
@@ -373,7 +373,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 **Update Speed:** 实时
 
 
-## 有限档深度信息
+## **有限档深度信息**
 
 > **Payload:**
 ```javascript 
@@ -407,7 +407,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 **Update Speed:** 1000ms 或 100ms
 
 
-## 增量深度信息
+## **增量深度信息**
 > **Payload:**
 ```javascript  
 {
@@ -439,7 +439,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 
 **Update Speed:** 1000ms 或 100ms
 
-## 如何正确在本地维护一个orderbook副本
+## **如何正确在本地维护一个orderbook副本**
 1. 订阅 **wss://sstream.asterdex.com/ws/bnbbtc@depth**
 2. 开始缓存收到的更新。同一个价位，后收到的更新覆盖前面的。
 3. 访问Rest接口 **https://sapi.asterdex.com/api/v1/depth?symbol=BNBBTC&limit=1000** 获得一个1000档的深度快照

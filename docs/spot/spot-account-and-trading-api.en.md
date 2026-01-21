@@ -1,5 +1,5 @@
 
-## Place order (TRADE)
+## **Place order (TRADE)**
 
 **Response ACK:**
 
@@ -63,7 +63,7 @@ Other information:
 * A `MARKET` order using `quoteOrderQty` will not violate the `LOT_SIZE` limit rules; the order will be executed as closely as possible to the given `quoteOrderQty`.  
 * Unless a previous order has already been filled, orders set with the same `newClientOrderId` will be rejected.
 
-## Cancel order (TRADE)
+## **Cancel order (TRADE)**
 
 **Response**
 
@@ -106,7 +106,7 @@ Cancel active orders
 
 At least one of `orderId` or `origClientOrderId` must be sent.
 
-## Query order (USER\_DATA)
+## **Query order (USER\_DATA)**
 
 **Response**
 
@@ -156,7 +156,7 @@ Note:
 
 * You must send at least one of `orderId` or `origClientOrderId`.
 
-## Current open orders (USER\_DATA)
+## **Current open orders (USER\_DATA)**
 
 **Response**
 
@@ -202,7 +202,7 @@ Retrieve all current open orders for trading pairs. Use calls without a trading 
 
 * If the symbol parameter is not provided, it will return the order books for all trading pairs.
 
-## Cancel All Open Orders (TRADE)
+## **Cancel All Open Orders (TRADE)**
 
 > **Response**
 
@@ -231,7 +231,7 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 
-## Query all orders (USER\_DATA)
+## **Query all orders (USER\_DATA)**
 
 **Response**
 
@@ -284,7 +284,7 @@ Retrieve all account orders; active, canceled, or completed.
 
 
 
-## Perp-spot transfer (TRADE)
+## **Perp-spot transfer (TRADE)**
 
 **Response:**
 
@@ -311,7 +311,7 @@ Retrieve all account orders; active, canceled, or completed.
 
 * kindType FUTURE_SPOT(future to spot)/SPOT_FUTURE(spot to future)
 
-## Transfer asset to other address (TRADE)
+## **Transfer asset to other address (TRADE)**
 
 > **Response:**
 
@@ -347,7 +347,7 @@ timestamp	| LONG | YES	|
 * If clientTranId is provided, its length must be at least 20 characters.
 
 
-## Get withdraw fee (NONE)
+## **Get withdraw fee (NONE)**
 > **Response:**
 ```javascript
 {
@@ -375,7 +375,7 @@ asset | STRING | YES |
 * chainId: 1(ETH),56(BSC),42161(Arbi)
 * gasCost: The minimum fee required for a withdrawal
 
-## Withdraw (USER_DATA)
+## **Withdraw (USER_DATA)**
 > **Response:**
 ```javascript
 {
@@ -449,7 +449,7 @@ const types = {
 const signature = await signer.signTypedData(domain, types, value)
 ```
 
-## Get User Create Apikey nonce (NONE)
+## **Get User Create Apikey nonce (NONE)**
 
 > **Response:**
 ```javascript
@@ -477,7 +477,7 @@ network | STRING | NO |
 * userOperationType: CREATE_API_KEY
 * network: For the Solana network, SOL must be provided; otherwise, this field can be ignored.
 
-## Create Apikey (NONE)
+## **Create Apikey (NONE)**
 
 > **Response:**
 ```javascript
@@ -521,7 +521,7 @@ const message = 'You are signing into Astherus ${nonce}';
 const signature = await signer.signMessage(message);
 ```
 
-## Account information (USER\_DATA)
+## **Account information (USER\_DATA)**
 
 **Response**
 
@@ -561,7 +561,7 @@ Retrieve current account information
 | recvWindow | LONG | NO |  |
 | timestamp | LONG | YES |  |
 
-## Account trade history (USER\_DATA)
+## **Account trade history (USER\_DATA)**
 
 **Response**
 

@@ -1,4 +1,4 @@
-## 创建/授权 Agent (TRADE)
+## **创建/授权 Agent (TRADE)**
 
 > **Response:**
 ```
@@ -38,6 +38,7 @@ TBD
 | canWithdraw  | BOOLEAN  | YES           | 是否允许提现（建议默认 false）                       |
 | builder      | STRING   | NO            | Builder 地址（归因/收款地址）                        |
 | maxFeeRate   | STRING   | NO            | Builder 最大费率上限（字符串或小数文本）             |
+| builderName   | STRING   | NO          | Builder 名称             |
 
 
 
@@ -47,7 +48,7 @@ TBD
 
 
 
-## **更新 Agent **(TRADE)
+## **更新 Agent (TRADE)**
 
 
 
@@ -97,7 +98,7 @@ TBD
 
 
 
-## **删除 Agent **(TRADE)
+## **删除 Agent (TRADE)**
 
 
 
@@ -152,11 +153,19 @@ TBD
 > **Response:**
 
 ```
-{
-  "code": 200,
-  "msg": "success",
-  "data": []
-}
+[
+  {
+    "agentAddress": "0x2610D3935A008036AF0AE12D014C8904b75fC5E9",
+    "agentName": "ross0001",
+    "ipWhitelist": "",
+    "expired": 1867945395040,
+    "source": "builder",
+    "canRead": true,
+    "canSpotTrade": true,
+    "canPerpTrade": true,
+    "canWithdraw": false
+  }
+]
 ```
 
 GET /fapi/v3/agent
@@ -340,11 +349,14 @@ TBD
 > **Response:**
 
 ```
-{
-  "code": 200,
-  "msg": "success",
-  "data": []
-}
+[
+  {
+    "userAddress": "0x6b5B34BB0B4Fe40bc38B2460376ADDdD36B30D47",
+    "builderAddress": "0xc2af13e1B1de3A015252A115309A0F9DEEDCFa0A",
+    "maxFeeRate": 0.00001,
+    "builderName": "ivan3"
+  }
+]
 ```
 
 GET /fapi/v3/builder

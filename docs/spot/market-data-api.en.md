@@ -1,5 +1,5 @@
 
-## Test server connectivity
+## **Test server connectivity**
 
 **Response**
 
@@ -15,7 +15,7 @@ Test whether the REST API can be reached.
 
 **Parameters:** NONE
 
-## Get server time
+## **Get server time**
 
 **Response**
 
@@ -33,7 +33,7 @@ Test if the REST API can be reached and retrieve the server time.
 
 **Parameters:** NONE
 
-## Trading specification information
+## **Trading specification information**
 
 **Response**
 
@@ -160,7 +160,7 @@ Retrieve trading rules and trading pair information.
 
 **Parameters:** None
 
-## Depth information
+## **Depth information**
 
 **Response**
 
@@ -204,7 +204,7 @@ Based on limit adjustments:
 | symbol | STRING | YES |  |
 | limit | INT | NO | Default 100\. Optional values: \[5, 10, 20, 50, 100, 500, 1000\] |
 
-## Recent trades list
+## **Recent trades list**
 
 **Response**
 
@@ -234,7 +234,7 @@ Get recent trades
 | symbol | STRING | YES |  |
 | limit | INT | NO | Default 500; maximum 1000 |
 
-## Query historical trades (MARKET\_DATA)
+## **Query historical trades (MARKET\_DATA)**
 
 **Response**
 
@@ -265,7 +265,7 @@ Retrieve historical trades
 | limit | INT | NO | Default 500; maximum 1000\. |
 | fromId | LONG | NO | Return starting from which trade id. Defaults to returning the most recent trade records. |
 
-## Recent trades (aggregated)
+## **Recent trades (aggregated)**
 
 **Response**
 
@@ -302,7 +302,7 @@ The difference between aggregated trades and individual trades is that trades wi
 * If you send startTime and endTime, the interval must be less than one hour.  
 * If no filter parameters (fromId, startTime, endTime) are sent, the most recent trade records are returned by default
 
-## K-line data
+## **K-line data**
 
 **Response**
 
@@ -340,7 +340,7 @@ Each K-line represents a trading pair. The open time of each K-line can be regar
 
 * If startTime and endTime are not sent, the most recent trades are returned by default
 
-## 24h price change
+## **24h price change**
 
 **Response**
 
@@ -386,7 +386,7 @@ Each K-line represents a trading pair. The open time of each K-line can be regar
 
 * Please note that omitting the symbol parameter will return data for all trading pairs
 
-## Latest price
+## **Latest price**
 
 **Response**
 
@@ -424,7 +424,7 @@ Get the latest price for a trading pair
 
 * If no trading pair parameter is sent, information for all trading pairs will be returned
 
-## Current best order
+## **Current best order**
 
 **Response**
 
@@ -468,7 +468,7 @@ Return the current best orders (highest bid, lowest ask)
 
 * If no trading pair parameter is sent, information for all trading pairs will be returned
 
-## Get symbol fees
+## **Get symbol fees**
 
 **Response**
 

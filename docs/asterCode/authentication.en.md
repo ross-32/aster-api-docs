@@ -1,4 +1,4 @@
-## Two signature modes 
+## **Two signature modes**
 
 ### A Management endpoints (`main=True`)
 - Applies to: approve/update/delete Agent; approve/update/delete Builder
@@ -11,7 +11,7 @@
 - `msg` is the “final querystring (excluding `signature`)”
 - Key rule: **the signed string must equal the final sent querystring (excluding signature)**. Any difference in parameter ordering/encoding will cause signature verification to fail.
 
-## Common fields
+## **Common fields**
 - `user`: user main address (required)
 - `nonce`: anti-replay nonce (demo uses microseconds-style nonce)
 - Management endpoints: require `user + nonce + signature + business params`

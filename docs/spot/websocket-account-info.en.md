@@ -1,4 +1,4 @@
-## WebSocket account information push
+## **WebSocket account information push**
 
 * The base URL for the API endpoints listed in this document is: [**https://sapi.asterdex.com**](https://sapi.asterdex.com)  
 * The `listenKey` used to subscribe to account data is valid for 60 minutes from the time of creation  
@@ -9,7 +9,7 @@
 * The stream name for subscribing to the user account data stream is \*\*/ws/\*\*  
 * Each connection is valid for no more than 24 hours; please handle disconnections and reconnections appropriately
 
-## Listen Key (spot account)
+## **Listen Key (spot account)**
 
 ### Generate Listen Key (USER\_STREAM)
 
@@ -69,7 +69,7 @@ Close user data stream
 | :---- | :---- | :---- | :---- |
 | listenKey | STRING | YES |  |
 
-## Payload: ACCOUNT\_UPDATE
+## **Payload: ACCOUNT\_UPDATE**
 
 An `outboundAccountPosition` event is sent whenever an account balance changes; it contains the assets that may have changed due to the event that generated the balance update.
 
@@ -96,7 +96,7 @@ An `outboundAccountPosition` event is sent whenever an account balance changes; 
 }
 ```
 
-## Payload: Order Update
+## **Payload: Order Update**
 
 Orders are updated via the `executionReport` event
 

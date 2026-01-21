@@ -1,4 +1,4 @@
-## Overview
+## **Overview**
 
 * The base API endpoint is: **https://fapi.asterdex.com**
 * A User Data Stream `listenKey` is valid for 60 minutes after creation.
@@ -11,7 +11,7 @@
 * A single connection to **fstream.asterdex.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark
 
 
-## Start User Data Stream (USER_STREAM)
+## **Start User Data Stream (USER_STREAM)**
 
 
 > **Response:**
@@ -37,7 +37,7 @@ None
 
 
 
-## Keepalive User Data Stream (USER_STREAM)
+## **Keepalive User Data Stream (USER_STREAM)**
 
 > **Response:**
 
@@ -60,7 +60,7 @@ None
 
 
 
-## Close User Data Stream (USER_STREAM)
+## **Close User Data Stream (USER_STREAM)**
 
 
 > **Response:**
@@ -83,7 +83,7 @@ Close out a user data stream.
 None
 
 
-## Event: User Data Stream Expired
+## **Event: User Data Stream Expired**
 
 > **Payload:**
 
@@ -106,7 +106,7 @@ When the `listenKey` used for the user data stream turns expired, this event wil
 
 
 
-## Event: Margin Call
+## **Event: Margin Call**
 
 > **Payload:**
 
@@ -140,7 +140,7 @@ When the `listenKey` used for the user data stream turns expired, this event wil
 
 
 
-## Event: Balance and Position Update
+## **Event: Balance and Position Update**
 
 
 > **Payload:**
@@ -233,7 +233,7 @@ Event type is `ACCOUNT_UPDATE`.
 
 * The field "bc" represents the balance change except for PnL and commission.
 
-## Event: Order Update
+## **Event: Order Update**
 
 
 > **Payload:**
@@ -337,7 +337,7 @@ event type is `ORDER_TRADE_UPDATE`.
 
 
 
-## Event: Account Configuration Update previous Leverage Update
+## **Event: Account Configuration Update previous Leverage Update**
 
 > **Payload:**
 

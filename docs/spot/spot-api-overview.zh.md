@@ -1,11 +1,11 @@
 
 
-## API 基本信息
+## **API 基本信息**
 * 本篇列出接口的baseurl: **https://sapi.asterdex.com**
 * 所有接口的响应都是 JSON 格式。
 * 所有时间、时间戳均为UNIX时间，单位为**毫秒**。
 
-## API Key 设置
+## **API Key 设置**
 * 很多接口需要API Key才可以访问.
 * 设置API Key的同时，为了安全，建议设置IP访问白名单.
 * **永远不要把你的API key/secret告诉给任何人**
@@ -42,7 +42,7 @@
 * 对参数的顺序不做要求。
 
 ---
-## 访问限制
+## **访问限制**
 ### 访问限制基本信息
 
 * 在 `/api/v1/exchangeInfo` `rateLimits` 数组中包含与交易的有关REQUEST_WEIGHT和ORDERS速率限制相关的对象。这些在 `限制种类 (rateLimitType)` 下的 `枚举定义` 部分中进一步定义。
@@ -79,7 +79,7 @@
 
 
 ---
-## 接口鉴权类型
+## **接口鉴权类型**
 * 每个接口都有自己的鉴权类型，鉴权类型决定了访问时应当进行何种鉴权。
 * 鉴权类型会在本文档中各个接口名称旁声明，如果没有特殊声明即默认为 `NONE`。
 * 如果需要 API-keys，应当在HTTP头中以 `X-MBX-APIKEY`字段传递。
@@ -98,7 +98,7 @@ MARKET_DATA | 需要有效的 API-Key
 * `TRADE` 和`USER_DATA` 接口是 签名(SIGNED)接口.
 
 ---
-## SIGNED (TRADE AND USER_DATA) Endpoint security
+## **SIGNED (TRADE AND USER_DATA) Endpoint security**
 * 调用`SIGNED` 接口时，除了接口本身所需的参数外，还需要在`query string` 或 `request body`中传递 `signature`, 即签名参数。
 * 签名使用`HMAC SHA256`算法. API-KEY所对应的API-Secret作为 `HMAC SHA256` 的密钥，其他所有参数作为`HMAC SHA256`的操作对象，得到的输出即为签名。
 * `签名` **大小写不敏感**.
@@ -201,7 +201,7 @@ symbol=BNBUSDT
 
 ---
 
-## 公开 API 参数
+## **公开 API 参数**
 ### 术语
 
 这里的术语适用于全部文档，建议特别是新手熟读，也便于理解。
@@ -315,7 +315,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 * MINUTE 分
 
 ---
-## 过滤器 
+## **过滤器**
 过滤器，即Filter，定义了一系列交易规则。
 共有两类，分别是针对交易对的过滤器`symbol filters`，和针对整个交易所的过滤器`exchange filters`(暂不支持)
 

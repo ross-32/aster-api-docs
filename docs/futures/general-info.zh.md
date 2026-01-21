@@ -1,4 +1,4 @@
-## Rest 基本信息
+## **Rest 基本信息**
 
 * 接口可能需要用户的 API Key，如何创建API-KEY请参考[这里](https://www.asterdex.com/)
 * 本篇列出REST接口的baseurl **https://fapi.asterdex.com**
@@ -35,7 +35,7 @@
 * `POST`, `PUT`, 和 `DELETE` 方法的接口, 参数可以在 `query string`中发送，也可以在 `request body`中发送(content type `application/x-www-form-urlencoded`)。允许混合这两种方式发送参数。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。
 * 对参数的顺序不做要求。
 
-## 访问限制
+## **访问限制**
 * 在 `/fapi/v1/exchangeInfo`接口中`rateLimits`数组里包含有REST接口(不限于本篇的REST接口)的访问限制。包括带权重的访问频次限制、下单速率限制。本篇`枚举定义`章节有限制类型的进一步说明。
 * 违反上述任何一个访问限制都会收到HTTP 429，这是一个警告.
 
@@ -62,7 +62,7 @@
 * 被拒绝或不成功的下单并不保证回报中包含以上头内容。
 * **下单频率限制是基于每个账户计数的。**
 
-## 接口鉴权类型
+## **接口鉴权类型**
 * 每个接口都有自己的鉴权类型，鉴权类型决定了访问时应当进行何种鉴权
 * 如果需要 API-key，应当在HTTP头中以`X-MBX-APIKEY`字段传递
 * API-key 与 API-secret 是大小写敏感的
@@ -77,7 +77,7 @@ USER_STREAM | 需要有效的API-KEY
 MARKET_DATA | 需要有效的API-KEY
 
 
-## 需要签名的接口 (TRADE 与 USER_DATA)
+## **需要签名的接口 (TRADE 与 USER_DATA)**
 * 调用这些接口时，除了接口本身所需的参数外，还需要传递`signature`即签名参数。
 * 签名使用`HMAC SHA256`算法. API-KEY所对应的API-Secret作为 `HMAC SHA256` 的密钥，其他所有参数作为`HMAC SHA256`的操作对象，得到的输出即为签名。
 * 签名大小写不敏感。
@@ -218,7 +218,7 @@ timestamp | 1591702613943
 
 
 
-## 公开API参数
+## **公开API参数**
 ### 术语解释
 * `base asset` 指一个交易对的交易对象，即写在靠前部分的资产名
 * `quote asset` 指一个交易对的定价资产，即写在靠后部分资产名
@@ -347,7 +347,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 
 
 
-## 过滤器
+## **过滤器**
 过滤器，即Filter，定义了一系列交易规则。
 共有两类，分别是针对交易对的过滤器`symbol filters`，和针对整个交易所的过滤器`exchange filters`(暂不支持)
 

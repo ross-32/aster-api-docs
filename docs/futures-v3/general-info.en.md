@@ -1,4 +1,4 @@
-## Overview
+## **Overview**
 
 * This API may require the user's AGENT. 
 * To create an AGENT please [click here](https://www.asterdex.com/en/api-wallet) and switch to `Pro API` at the top
@@ -42,7 +42,7 @@
 * For POST, PUT, and DELETE method APIs, send data in the request body (content type application/x-www-form-urlencoded)
 * Parameters may be sent in any order.
 
-## LIMITS
+## **LIMITS**
 
 * The `/fapi/v3/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 * A `429` will be returned when either rate limit is violated.
@@ -80,7 +80,7 @@ server.
 It is recommended to use a small recvWindow of 5000 or less!
 </aside>
 
-## API authentication type
+## **API authentication type**
 
 * Each API has its own authentication type, which determines what kind of authentication is required when accessing it.
 * If authentication is required, a signer should be included in the request body.
@@ -93,7 +93,7 @@ It is recommended to use a small recvWindow of 5000 or less!
 | USER_STREAM   | A valid signer and signature are required |
 | MARKET_DATA   | A valid signer and signature are required |
 
-## Authentication signature payload
+## **Authentication signature payload**
 
 | Parameter | Description                        |
 | --------- | ---------------------------------- |
@@ -102,7 +102,7 @@ It is recommended to use a small recvWindow of 5000 or less!
 | nonce     | Current timestamp, in microseconds |
 | signature | Signature                          |
 
-## Endpoints requiring signature 
+## **Endpoints requiring signature**
 * Security Type: TRADE, USER_DATA, USER_STREAM, MARKET_DATA
 * After converting the API parameters to strings, sort them by their key values in ASCII order to generate the final string. Note: All parameter values must be treated as strings during the signing process.
 * After generating the string, combine it with the authentication signature parameters user, signer, and nonce, then use Web3’s ABI parameter encoding to generate the bytecode.
@@ -128,7 +128,7 @@ if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow){
   }
 ```
 
-## Example of POST /fapi/v3/order
+## **Example of POST /fapi/v3/order**
 
 #### All parameters are passed through the request body (Python 3.9.6)
 
@@ -246,7 +246,7 @@ my_dict = {'symbol': 'SANDUSDT', 'positionSide': 'BOTH', 'type': 'LIMIT', 'side'
     #curl  -X POST 'https://fapi.asterdex.com/fapi/v3/order' -d 'symbol=SANDUSDT&positionSide=BOTH&type=LIMIT&side=BUY&timeInForce=GTC&quantity=190&price=0.28694&recvWindow=50000&timestamp=1749545309665&nonce=1748310859508867&user=0x63DD5aCC6b1aa0f563956C0e534DD30B6dcF7C4e&signer=0x21cF8Ae13Bb72632562c6Fff438652Ba1a151bb0&signature=0x0337dd720a21543b80ff861cd3c26646b75b3a6a4b5d45805d4c1d6ad6fc33e65f0722778dd97525466560c69fbddbe6874eb4ed6f5fa7e576e486d9b5da67f31b'
 ```
 
-## Example of POST /fapi/v3/order
+## **Example of GET /fapi/v3/order**
 
 #### Example: All parameters are sent through the query string (Python 3.9.6).
 
@@ -362,7 +362,7 @@ from eth_account import Account
     #curl  -X GET 'https://fapi.asterdex.com/fapi/v3/order?symbol=SANDUSDT&side=BUY&type=LIMIT&orderId=2194215&recvWindow=50000&timestamp=1749545309665&nonce=1748310859508867&user=0x63DD5aCC6b1aa0f563956C0e534DD30B6dcF7C4e&signer=0x21cF8Ae13Bb72632562c6Fff438652Ba1a151bb0&signature=0x4f5e36e91f0d4cf5b29b6559ebc2c808d3c808ebb13b2bcaaa478b98fb4195642c7473f0d1aa101359aaf278126af1a53bcb482fb05003bfb6bdc03de03c63151b'
 ```
 
-## python script
+## **python script**
 
 ```python
 #Python 3.9.6
@@ -463,7 +463,7 @@ if __name__ == '__main__':
     # call(getOrder)
 ```
 
-## Public Endpoints Info
+## **Public Endpoints Info**
 
 ### Terminology
 
@@ -586,7 +586,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 * MINUTE
 
-## Filters
+## **Filters**
 
 Filters define trading rules on a symbol or an exchange.
 

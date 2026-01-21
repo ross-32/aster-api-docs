@@ -1,4 +1,4 @@
-## Error code
+## **Error code**
 
 error JSON payload:
 
@@ -11,7 +11,7 @@ error JSON payload:
 
 Errors consist of two parts: an error code and a message. The code is standardized, but the message may vary.
 
-## 10xx \- General server or network issues
+## **10xx \- General server or network issues**
 
 ### \-1000 UNKNOWN
 
@@ -78,7 +78,7 @@ Errors consist of two parts: an error code and a message. The code is standardiz
 
 * The start time in the parameters is after the end time.
 
-## 11xx \- Request issues
+## **11xx \- Request issues**
 
 ### \-1100 ILLEGAL\_CHARS
 
@@ -177,7 +177,7 @@ Errors consist of two parts: an error code and a message. The code is standardiz
 
 * Invalid newOrderRespType. 
 
-## 20xx \- Processing Issues 
+## **20xx \- Processing Issues**
 
 ### \-2010 NEW\_ORDER\_REJECTED 
 
@@ -231,7 +231,7 @@ Errors consist of two parts: an error code and a message. The code is standardiz
 
 * This OrderType is not supported when reduceOnly.
 
-## 40xx \- Filters and other Issues
+## **40xx \- Filters and other Issues**
 
 ### \-4000 INVALID\_ORDER\_STATUS
 

@@ -52,6 +52,7 @@ plugins:
             Market Data : 行情数据
             Spot Account & Trading: 现货账户与交易
             Futures Account & Trading: 合约账户与交易
+            Deposit & Withdrawal: 充值与提现
             WebSocket Market Data: WebSocket 行情数据推送
             WebSocket Account Info: WebSocket 账户信息推送
             Error Codes: 错误码 
@@ -83,6 +84,7 @@ nav:
       - Futures Account & Trading: futures-v3/account&trades.md
       - WebSocket Market Data: futures-v3/websocket-market-streams.md
       - WebSocket Account Info: futures-v3/user-data-streams.md
+      - Deposit & Withdrawal: futures-v3/deposit&withdrawal.md
       - Error Codes: futures-v3/error-codes.md
       
   - Futures: 

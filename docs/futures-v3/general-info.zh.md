@@ -1,4 +1,4 @@
-## Rest 基本信息
+## **Rest 基本信息**
 
 * 接口可能需要用户的AGENT
 * AGENT创建请[点击这里](https://www.asterdex.com/zh-CN/api-wallet) 并且切换到API管理上方的`专业API`
@@ -36,7 +36,7 @@
 * `POST`, `PUT`, 和 `DELETE` 方法的接口, 在 `request body`中发送(content type `application/x-www-form-urlencoded`)
 * 对参数的顺序不做要求。
 
-## 访问限制
+## **访问限制**
 * 在 `/fapi/v3/exchangeInfo`接口中`rateLimits`数组里包含有REST接口(不限于本篇的REST接口)的访问限制。包括带权重的访问频次限制、下单速率限制。本篇`枚举定义`章节有限制类型的进一步说明。
 * 违反上述任何一个访问限制都会收到HTTP 429，这是一个警告.
 
@@ -71,7 +71,7 @@
 不推荐使用5秒以上的recvWindow
 </aside>
 
-## 接口鉴权类型
+## **接口鉴权类型**
 * 每个接口都有自己的鉴权类型，鉴权类型决定了访问时应当进行何种鉴权
 * 如果需要鉴权，应当在请求体中添加signer
 
@@ -83,7 +83,7 @@ USER_DATA | 需要有效的signer和签名
 USER_STREAM | 需要有效的signer和签名
 MARKET_DATA | 需要有效的signer和签名
 
-## 鉴权签名体
+## **鉴权签名体**
 参数 | 描述
 ------------ | ------------
 user | 主账户钱包地址
@@ -91,7 +91,7 @@ signer | API钱包地址
 nonce | 当前时间戳,单位为微秒
 signature | 签名
 
-## 需要签名的接口 
+## **需要签名的接口**
 * TRADE 与 USER_DATA,USER_STREAM,MARKET_DATA
 * 接口参数转字符串后按照key值ASCII编码后生成的字符串 请注意所有参数取值请以字符串的方式进行签名
 * 生成字符串后在与鉴权签名参数的user,signer,nonce使用web3的abi参数编码生成字节码
@@ -112,7 +112,7 @@ signature | 签名
   }
   ```
 
-## POST /fapi/v3/order 的示例 
+## **POST /fapi/v3/order 的示例**
 
 #### 所有参数均通过from body请求(Python 3.9.6)
 
@@ -229,7 +229,7 @@ long microsecond = now.getEpochSecond() * 1000000 + now.getNano() / 1000;
 
 ```
 
-## GET /fapi/v3/order 的示例 
+## **GET /fapi/v3/order 的示例**
 #### 示例 : 所有参数通过 query string 发送(Python 3.9.6) 
 
 #### 示例 : 以下参数为api注册信息,user,signer,privateKey仅供示范(privateKey为agent的私钥)
@@ -336,7 +336,7 @@ my_dict = {'symbol':'SANDUSDT','side':"SELL","type":'LIMIT','orderId':2194215}
     #curl  -X GET 'https://fapi.asterdex.com/fapi/v3/order?symbol=SANDUSDT&side=BUY&type=LIMIT&orderId=2194215&recvWindow=50000&timestamp=1749545309665&nonce=1748310859508867&user=0x63DD5aCC6b1aa0f563956C0e534DD30B6dcF7C4e&signer=0x21cF8Ae13Bb72632562c6Fff438652Ba1a151bb0&signature=0x4f5e36e91f0d4cf5b29b6559ebc2c808d3c808ebb13b2bcaaa478b98fb4195642c7473f0d1aa101359aaf278126af1a53bcb482fb05003bfb6bdc03de03c63151b'
 
 ```
-## 完整python脚本示例
+## **完整python脚本示例**
 ```python
 #Python 3.9.6
 #eth-account~=0.13.7
@@ -436,7 +436,7 @@ if __name__ == '__main__':
 
 ```
 
-## 公开API参数
+## **公开API参数**
 ### 术语解释
 * `base asset` 指一个交易对的交易对象，即写在靠前部分的资产名
 * `quote asset` 指一个交易对的定价资产，即写在靠后部分资产名
@@ -564,7 +564,7 @@ m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
 
 
 
-## 过滤器
+## **过滤器**
 过滤器，即Filter，定义了一系列交易规则。
 共有两类，分别是针对交易对的过滤器`symbol filters`，和针对整个交易所的过滤器`exchange filters`(暂不支持)
 

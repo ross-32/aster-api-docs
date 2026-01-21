@@ -1,4 +1,4 @@
-## General API Information
+## **General API Information**
 
 * Some endpoints will require an API Key. Please refer to [this page](https://www.asterdex.com/)
 * The base endpoint is: **https://fapi.asterdex.com**
@@ -46,7 +46,7 @@
 * If a parameter sent in both the `query string` and `request body`, the
   `query string` parameter will be used.
 
-## LIMITS
+## **LIMITS**
 * The `/fapi/v1/exchangeInfo` `rateLimits` array contains objects related to the exchange's `RAW_REQUEST`, `REQUEST_WEIGHT`, and `ORDER` rate limits. These are further defined in the `ENUM definitions` section under `Rate limiters (rateLimitType)`.
 * A `429` will be returned when either rate limit is violated.
 
@@ -71,7 +71,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 * Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**` headers in the response.
 * **The order rate limit is counted against each account**.
 
-## Endpoint Security Type
+## **Endpoint Security Type**
 * Each endpoint has a security type that determines the how you will
   interact with it.
 * API-keys are passed into the Rest API via the `X-MBX-APIKEY`
@@ -93,7 +93,7 @@ MARKET_DATA | Endpoint requires sending a valid API-Key.
 
 * `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
 
-## SIGNED (TRADE and USER_DATA) Endpoint Security
+## **SIGNED (TRADE and USER_DATA) Endpoint Security**
 * `SIGNED` endpoints require an additional parameter, `signature`, to be
   sent in the  `query string` or `request body`.
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation.
@@ -241,7 +241,7 @@ Note that the signature is different in example 3.
 There is no & between "GTC" and "quantity=1".
 
 
-## Public Endpoints Info
+## **Public Endpoints Info**
 ### Terminology
 * `base asset` refers to the asset that is the `quantity` of a symbol.
 * `quote asset` refers to the asset that is the `price` of a symbol.
@@ -372,7 +372,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 
 
-## Filters
+## **Filters**
 Filters define trading rules on a symbol or an exchange.
 
 ### Symbol filters

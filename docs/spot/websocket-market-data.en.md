@@ -1,4 +1,4 @@
-## WebSocket market data feed
+## **WebSocket market data feed**
 
 * The base URL for all wss endpoints listed in this document is: **wss://sstream.asterdex.com**  
 * Streams have either a single raw stream or a combined stream  
@@ -9,7 +9,7 @@
 * Each link to **sstream.asterdex.com** is valid for no more than 24 hours; please handle reconnections appropriately  
 * Every 3 minutes the server sends a ping frame; the client must reply with a pong frame within 10 minutes, otherwise the server will close the connection. The client is allowed to send unpaired pong frames (i.e., the client may send pong frames at a frequency higher than once every 10 minutes to keep the connection alive).
 
-## Real-time subscribe/unsubscribe data streams
+## **Real-time subscribe/unsubscribe data streams**
 
 * The following messages can be sent via WebSocket to subscribe or unsubscribe to data streams. Examples are shown below.  
 * The `id` in the response content is an unsigned integer that serves as the unique identifier for exchanges of information.  
@@ -102,7 +102,7 @@ Currently, the only configurable property is whether to enable the `combined` ("
 | {"code": 2, "msg": "Invalid request: missing field method at line 1 column 73"} | Data did not provide method |
 | {"code":3,"msg":"Invalid JSON: expected value at line %s column %s"} | JSON syntax error |
 
-## Collection transaction flow
+## **Collection transaction flow**
 
 **Payload:**
 
@@ -128,7 +128,7 @@ The collection transaction stream pushes transaction information and is an aggre
 
 **Update speed:** real-time
 
-## Tick-by-tick trades
+## **Tick-by-tick trades**
 
 **Payload:**
 
@@ -149,7 +149,7 @@ The collection transaction stream pushes transaction information and is an aggre
 
 Each trade stream pushes the details of every individual trade. A **trade**, also called a transaction, is defined as a match between exactly one taker and one maker.
 
-## K-line streams
+## **K-line streams**
 
 **Payload:**
 
@@ -206,7 +206,7 @@ m (minutes), h (hours), d (days), w (weeks), M (months)
 * 1w  
 * 1M
 
-## Simplified ticker by symbol
+## **Simplified ticker by symbol**
 
 **Payload:**
 
@@ -230,7 +230,7 @@ Refreshed simplified 24-hour ticker information by symbol
 
 **Update speed:** 1000ms
 
-## Compact tickers for all symbols in the entire market
+## **Compact tickers for all symbols in the entire market**
 
 **Payload:**
 
@@ -248,7 +248,7 @@ Same as above, but pushes all trading pairs. Note that only updated tickers will
 
 **Update speed:** 1000ms
 
-## Full ticker per symbol
+## **Full ticker per symbol**
 
 **Payload:**
 
@@ -281,7 +281,7 @@ Pushes per-second tag statistics for a single trading pair over a rolling 24-hou
 
 **Update speed:** 1000ms
 
-## Complete ticker for all trading pairs on the entire market
+## **Complete ticker for all trading pairs on the entire market**
 
 **Payload:**
 
@@ -299,7 +299,7 @@ Pushes the full 24-hour refreshed ticker information for all trading pairs acros
 
 **Update speed:** 1000ms
 
-## Best order book information by symbol
+## **Best order book information by symbol**
 
 **Payload:**
 
@@ -320,7 +320,7 @@ Real-time push of best order book information for the specified trading pair
 
 **Update speed:** Real-time
 
-## Best order book information across the entire market
+## **Best order book information across the entire market**
 
 **Payload:**
 
@@ -336,7 +336,7 @@ Real-time push of the best order information for all trading pairs
 
 **Update speed:** Real-time
 
-## Limited depth information
+## **Limited depth information**
 
 **Payload:**
 
@@ -370,7 +370,7 @@ Limited depth information pushed every second or every 100 milliseconds. Levels 
 
 **Update speed:** 1000ms or 100ms
 
-## Incremental depth information
+## **Incremental depth information**
 
 **Payload:**
 
@@ -404,7 +404,7 @@ Pushes the changed parts of the orderbook (if any) every second or every 100 mil
 
 **Update speed:** 1000ms or 100ms
 
-## How to correctly maintain a local copy of an order book
+## **How to correctly maintain a local copy of an order book**
 
 1. Subscribe to **wss://sstream.asterdex.com/ws/bnbbtc@depth**  
 2. Start caching the received updates. For the same price level, later updates overwrite earlier ones.  
