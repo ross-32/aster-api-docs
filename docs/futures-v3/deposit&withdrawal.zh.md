@@ -1,20 +1,20 @@
-##  **Get all deposit assets**
+## **查询所有充值资产**
 
-request:
+请求：
 
 ```shell
 curl 'https://www.asterdex.com/bapi/futures/v1/public/future/aster/deposit/assets?chainIds=56&networks=EVM&accountType=spot'
 ```
 
-params:
+参数：
 
-|param      | type   | required | description                                                            |
-|-----------|--------|----------|------------------------------------------------------------------------|
-| chainIds  | string | true     | Chain ID, multiple IDs separated by commas                             |
-| networks  | string | false    | Network type, e.g., EVM, SOLANA, multiple networks separated by commas |
-| accountType | string | true   | Account type, e.g., spot, perp                                         |
+| 参数        | 类型   | 必填 | 说明                                       |
+|-------------|--------|------|--------------------------------------------|
+| chainIds    | string | 是   | 链 ID，多个 ID 用逗号分隔                  |
+| networks    | string | 否   | 网络类型，如 EVM、SOLANA，多个用逗号分隔  |
+| accountType | string | 是   | 账户类型，如 spot、perp                    |
 
-response:
+响应：
 
 ```json
 {
@@ -50,77 +50,77 @@ response:
 }
 ```
 
-## **Get all withdraw assets**
+## **查询所有提现资产**
 
-request:
+请求：
 
 ```shell
 curl 'https://www.asterdex.com/bapi/futures/v1/public/future/aster/withdraw/assets?chainIds=56&networks=EVM&accountType=spot'
 ```
 
-params:
+参数：
 
-|param      | type   | required | description                                                            |
-|-----------|--------|----------|------------------------------------------------------------------------|
-| chainIds  | string | true     | Chain ID, multiple IDs separated by commas                             |
-| networks  | string | false    | Network type, e.g., EVM, SOLANA, multiple networks separated by commas |
-| accountType | string | true   | Account type, e.g., spot, perp                                         |
+| 参数        | 类型   | 必填 | 说明                                       |
+|-------------|--------|------|--------------------------------------------|
+| chainIds    | string | 是   | 链 ID，多个 ID 用逗号分隔                  |
+| networks    | string | 否   | 网络类型，如 EVM、SOLANA，多个用逗号分隔  |
+| accountType | string | 是   | 账户类型，如 spot、perp                    |
 
-response:
+响应：
 
 ```json
 {
-  "code": "000000",
-  "message": null,
-  "messageDetail": null,
-  "data": [
-    {
-      "name": "ASTER",
-      "displayName": "ASTER",
-      "contractAddress": "0x000ae314e2a2172a039b26378814c252734f556a",
-      "decimals": 18,
-      "network": "EVM",
-      "chainId": 56,
-      "withdrawType": "autoWithdraw",
-      "rank": 10,
-      "isNative": false,
-      "isProfit": true,
-      "admin": null,
-      "bank": null,
-      "tokenVaultAuthority": null,
-      "tokenVault": null,
-      "tokenMint": null,
-      "associatedTokenProgram": null,
-      "tokenProgram": null,
-      "systemProgram": null,
-      "ixSysvar": null,
-      "priceFeed": null,
-      "priceFeedProgram": null,
-      "solVault": null
-    }
-  ],
-  "success": true
+    "code": "000000",
+    "message": null,
+    "messageDetail": null,
+    "data": [
+        {
+            "name": "ASTER",
+            "displayName": "ASTER",
+            "contractAddress": "0x000ae314e2a2172a039b26378814c252734f556a",
+            "decimals": 18,
+            "network": "EVM",
+            "chainId": 56,
+            "withdrawType": "autoWithdraw",
+            "rank": 10,
+            "isNative": false,
+            "isProfit": true,
+            "admin": null,
+            "bank": null,
+            "tokenVaultAuthority": null,
+            "tokenVault": null,
+            "tokenMint": null,
+            "associatedTokenProgram": null,
+            "tokenProgram": null,
+            "systemProgram": null,
+            "ixSysvar": null,
+            "priceFeed": null,
+            "priceFeedProgram": null,
+            "solVault": null
+        }
+    ],
+    "success": true
 }
 ```
 
-## **Estimate withdraw fee**
+## **估算提现手续费**
 
-request:
+请求：
 
 ```shell
 curl 'https://www.asterdex.com/bapi/futures/v1/public/future/aster/estimate-withdraw-fee?chainId=56&network=EVM&currency=ASTER&accountType=spot'
 ```
 
-params:
+参数：
 
-|param       | type   | required | description                  |
-|------------|--------|----------|------------------------------|
-| chainId    | int    | true     | Chain ID                     |
-| network    | string | true     | Network type, e.g., EVM, SOL |
-| currency   | string | true     | Currency name, e.g., ASTER   |
-| accountType | string | true    | Account type, e.g., spot, perp |
+| 参数        | 类型   | 必填 | 说明                         |
+|-------------|--------|------|------------------------------|
+| chainId     | int    | 是   | 链 ID                        |
+| network     | string | 是   | 网络类型，如 EVM、SOL        |
+| currency    | string | 是   | 币种名称，如 ASTER           |
+| accountType | string | 是   | 账户类型，如 spot、perp      |
 
-response:
+响应：
 
 ```json
 {
@@ -139,13 +139,137 @@ response:
 }
 ```
 
-- gasCost: Estimated withdrawal fee in token units
+| 字段    | 说明                     |
+|---------|--------------------------|
+| gasCost | 以代币单位计的预估提现手续费 |
 
-## **Withdraw signature**
+## **获取服务器时间**
 
-* when you withdraw, you should supply a EIP712 signature. You can get the signature by signing the following message with your wallet.
+请求：
 
-EIP712 Domain
+```shell
+curl 'https://fapi5.asterdex.com/fapi/v3/time'
+```
+
+响应：
+
+```json
+{
+    "serverTime": 1742198400000
+}
+```
+
+| 字段       | 说明                            |
+|------------|---------------------------------|
+| serverTime | 当前服务器时间（Unix 毫秒时间戳）|
+
+---
+
+## **签名说明**
+
+### API-KEY 签名（V1）
+
+使用 V1 API Key 时，您需要自行生成 `API_KEY` 和 `API_SECRET`。每次请求必须包含以下三个参数：
+
+| 参数       | 说明                                                                           |
+|------------|--------------------------------------------------------------------------------|
+| timestamp  | 当前时间的毫秒级 Unix 时间戳                                                   |
+| recvWindow | 请求在 `timestamp` 之后保持有效的最大毫秒数（默认：`5000`）                   |
+| signature  | 使用 `API_SECRET` 对完整请求查询字符串或请求体进行 HMAC SHA256 签名            |
+
+此外，请在请求头中携带您的 `API_KEY`：
+
+```
+X-MBX-APIKEY: <your API_KEY>
+```
+
+#### 如何生成签名
+
+将所有查询参数拼接为一个字符串，然后使用 HMAC SHA256 和您的 `API_SECRET` 进行签名，将结果作为 `signature` 参数附加在末尾。
+
+```javascript
+const queryString = 'asset=USDT&amount=10&timestamp=1742198400000&recvWindow=5000';
+const signature = CryptoJS.HmacSHA256(queryString, API_SECRET).toString();
+const finalUrl = `${baseUrl}?${queryString}&signature=${signature}`;
+```
+
+> `signature` 参数必须始终作为查询字符串中的**最后一个**参数。
+
+### Pro API-KEY 签名（V3）
+
+使用 Pro API Key（V3）时，您将获得一个专属 EOA 钱包地址及其对应私钥。每次 V3 请求必须包含以下参数：
+
+| 参数      | 说明                                                                                         |
+|-----------|----------------------------------------------------------------------------------------------|
+| nonce     | 纳秒级时间戳，30 秒内有效。请使用[获取服务器时间](#获取服务器时间)接口获取当前服务器时间。  |
+| user      | 用户自己的钱包地址                                                                           |
+| signer    | 签发的 EOA 钱包地址                                                                          |
+| signature | 使用签发的 EOA 钱包私钥对所有请求参数的签名                                                  |
+
+#### 如何生成签名
+
+V3 签名为 EIP712 typed data 签名。将所有查询参数拼接为一个字符串作为消息内容，然后使用签发的 EOA 私钥通过 `signTypedData` 进行签名。
+
+**EIP712 Domain**
+
+```json
+{
+  "name": "AsterSignTransaction",
+  "version": "1",
+  "chainId": "<API_CHAINID>",
+  "verifyingContract": "0x0000000000000000000000000000000000000000"
+}
+```
+
+**EIP712 Types**
+
+```json
+{
+  "Message": [
+    { "name": "msg", "type": "string" }
+  ]
+}
+```
+
+**Value**
+
+```json
+{
+  "msg": "<所有请求参数的查询字符串>"
+}
+```
+
+**示例（JavaScript / ethers.js）**
+
+```javascript
+const domain = {
+    name: 'AsterSignTransaction',
+    version: '1',
+    chainId: 1666,
+    verifyingContract: ethers.ZeroAddress,
+};
+
+const types = {
+    Message: [
+        { name: 'msg', type: 'string' },
+    ],
+};
+
+const queryString = 'nonce=1742198400000000000&user=0xYourAddress&signer=0xSignerAddress';
+const value = { msg: queryString };
+
+const wallet = new ethers.Wallet(API_PRIVATEKEY);
+const signature = await wallet.signTypedData(domain, types, value);
+const finalUrl = `${baseUrl}?${queryString}&signature=${signature}`;
+```
+
+> `signature` 参数必须始终作为查询字符串中的**最后一个**参数。
+
+## **EVM 提现签名**
+
+* 提现时需提供 EIP712 签名，使用您的钱包对以下消息内容进行签名。
+
+### EIP712 Domain
 
 ```json
 {
@@ -156,14 +280,14 @@ EIP712 Domain
 }
 ```
 
-|field|desc|
-|---|---|
-|name|fix string 'Aster'|
-|version|fix string '1'|
-|chainId|the chainId of withdraw chain|
-|verifyingContract|fix address: zero address|
+| 字段              | 说明                      |
+|-------------------|---------------------------|
+| name              | 固定字符串：`Aster`       |
+| version           | 固定字符串：`1`           |
+| chainId           | 提现目标链的 chainId      |
+| verifyingContract | 固定地址：零地址          |
 
-EIP712 Types
+### EIP712 Types
 
 ```json
 {
@@ -180,132 +304,107 @@ EIP712 Types
 }
 ```
 
-|field          | desc                                                                                                  |
-|---------------|-------------------------------------------------------------------------------------------------------|
-|type           | fix string 'Withdraw'                                                                                 |
-|destination    | the receipt address, should be user's register address                                                |
-|destination Chain | the chain name of receipt address, you can see the defination of chainName below                      |
-|token| the name of the currency user withdraw, e.g. ASTER, you can get the name from withdraw/asset API      |
-|amount | the amount user withdraw in token unit, eg. '1.23'                                                    |
-|fee| the fee user will pay in token unit, eg. '0.01' (you can get the fee from withdraw/estimate-withdraw-fee API) |
-|nonce| a unique number, use the current timestamp in milliseconds and multiply '1000'                        |
-|aster chain| fix string 'Mainnet'                                                                                  |
+| 字段              | 说明                                                                              |
+|-------------------|-----------------------------------------------------------------------------------|
+| type              | 固定字符串：`Withdraw`                                                            |
+| destination       | 收款地址，需为用户注册地址                                                        |
+| destination Chain | 收款地址所在链名称，chainName 定义见下表                                          |
+| token             | 提现币种名称，如 `ASTER`，可通过 withdraw/asset 接口获取                         |
+| amount            | 提现数量（代币单位），如 `1.23`                                                   |
+| fee               | 用户支付的手续费（代币单位），如 `0.01`，可通过 estimate-withdraw-fee 接口获取   |
+| nonce             | 唯一数值，使用当前毫秒级时间戳乘以 `1000`                                        |
+| aster chain       | 固定字符串：`Mainnet`                                                             |
 
-chainName definition
+### chainName 定义
 
-|chainId| chainName |
-|---|-----------|
-|56| BSC       |
-|42161| Arbitrum  |
-|1| ETH       |
+| chainId | chainName |
+|---------|-----------|
+| 1       | ETH       |
+| 56      | BSC       |
+| 42161   | Arbitrum  |
 
-## **Withdraw**
+## **Solana 提现签名（可选）**
 
-request:
+提交 Solana 提现时，可选择性地提供有效签名。虽然目前签名并非必填，但后续版本将强制要求。强烈建议携带签名——只有包含有效签名的提现请求才会被记录在 L1 链上。
+
+### 如何生成签名
+
+Solana 提现签名为 **Ed25519 签名**，对结构化消息字符串进行签名，结果以 **Base58** 编码。
+
+**消息格式**
+
+按以下字段顺序用逗号拼接：
+
+```
+PrimaryType=Withdraw,AsterChain=Mainnet,Destination={destination},DestinationChain={destinationChain},Token={token},Amount={amount},Fee={fee},Nonce={nonce}
+```
+
+| 字段             | 说明                                           |
+|------------------|------------------------------------------------|
+| Destination      | 收款方 Solana 钱包地址                         |
+| DestinationChain | 固定字符串：`Solana`                           |
+| Token            | 币种名称，如 `USDT`                            |
+| Amount           | 去除尾部零的提现数量，如 `1.2`（非 `1.20`）   |
+| Fee              | 去除尾部零的手续费，如 `0.1`（非 `0.10`）     |
+| Nonce            | 纳秒级时间戳，如 `1773741793787000`            |
+
+**消息示例**
+
+```
+PrimaryType=Withdraw,AsterChain=Mainnet,Destination=H7LqU4p4f8LDddADXDH9oFeoh3r7vhfJFf3XCEot8pkd,DestinationChain=Solana,Token=USDT,Amount=1.2,Fee=0.1,Nonce=1773741793787000
+```
+
+**示例（Node.js）**
+
+```javascript
+import { Keypair } from '@solana/web3.js';
+import nacl from 'tweetnacl';
+import bs58 from 'bs58';
+
+const destination = 'H7LqU4p4f8LDddADXDH9oFeoh3r7vhfJFf3XCEot8pkd';
+const destinationChain = 'Solana';
+const token = 'USDT';
+const amount = '1.2';
+const fee = '0.1';
+const nonce = Date.now() * 1000; // 纳秒级时间戳
+
+const message = `PrimaryType=Withdraw,AsterChain=Mainnet,Destination=${destination},DestinationChain=${destinationChain},Token=${token},Amount=${amount},Fee=${fee},Nonce=${nonce}`;
+
+const messageBytes = Buffer.from(message, 'utf8');
+const keypair = Keypair.fromSecretKey(bs58.decode(YOUR_PRIVATE_KEY));
+const signatureBytes = nacl.sign.detached(messageBytes, keypair.secretKey);
+const userSignature = bs58.encode(signatureBytes);
+```
+
+> `Amount` 和 `Fee` 中的尾部零必须去除（如 `1.20` → `1.2`），否则签名验证将失败。
+
+## **提现接口列表**
+
+### 通过 fapi 提现 \[evm\] \[futures\]
+
+* 注意：请参照 [API-KEY 签名（V1）](#api-key-签名v1) 说明生成请求签名，以下示例仅包含该接口特有参数。
+
+请求：
 
 ```shell
-curl -X POST "https://www.asterdex.com/bapi/futures/v1/private/future/aster/user-withdraw" -H "accept: */*" -H "x-gray-env: normal" -H "x-trace-id: fa2a5961b4a346e083f2bb0bffe39e2f" -H "Content-Type: application/json" \
--d "{ \"accountType\": \"spot\", \"amount\": \"10.2\", \"chainId\": 97, \"currency\": \"USDT\", \"fee\": \"0.01\", \"nonce\": \"1761029928213000\", \"receiver\": \"0x4C5EdB66CC7626a1C92d5178c3E5c45409BcE6D7\", \"userSignature\": \"0xc0299efe235ec194d070163b1f92ebf5d01bd820c1c08fa9730929c7a36172a9001b99203b2f9997aa7d41b7658348704e0515f4c40e76f1892f7a5b0af31daa1c\"}"
+curl --location --request POST 'https://fapi.asterdex.com/fapi/aster/user-withdraw?chainId=56&asset=USDT&amount=31&fee=0.3&receiver=0x000ae314e2a2172a039b26378814c252734f556a&nonce=1761210000000000&userSignature=0xde4ca529eef20db136eed1daf1d072083431d5279e6d6e219600cf57161c5e6d1232af3c8a8ef37ba8b5963f439ef9cc2b475fe18dcc3732dda9fb93c94a3abd1c' \
+  --header 'Content-Type: application/json' \
+  --header 'X-MBX-APIKEY: Your API KEY'
 ```
 
-params:
+参数：
 
-|param         | type   | required | description                                               |
-|--------------|--------|----------|-----------------------------------------------------------|
-| accountType  | string | true     | Account type, e.g., spot, perp                            |
-| amount       | string | true     | Withdraw amount in token unit                             |
-| chainId      | int    | true     | Chain ID                                                  |
-| currency     | string | true     | Currency name, e.g., ASTER                                |
-| fee          | string | true     | Withdraw fee in token unit                                |
-| nonce        | string | true     | Unique number, should be the save in signature            |
-| receiver     | string | true     | Withdraw receipt address, should be the save in signature |
-| userSignature | string | true    | EIP712 signature                                         |
+| 参数          | 类型   | 必填 | 说明                               |
+|---------------|--------|------|------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）               |
+| chainId       | int    | 是   | 链 ID                              |
+| asset         | string | 是   | 币种名称，如 ASTER                 |
+| fee           | string | 是   | 提现手续费（代币单位）             |
+| nonce         | string | 是   | 唯一数值，需与签名中的值一致       |
+| receiver      | string | 是   | 提现收款地址，需与签名中的值一致   |
+| userSignature | string | 是   | EIP712 签名                        |
 
-response:
-
-```json
-{
-  "code": "200",
-  "message": "success",
-  "messageDetail": null,
-  "data": {
-    "withdrawId": "1234567",
-    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
-  },
-  "success": true
-}
-```
-
-|field      | desc                                 |
-|-----------|--------------------------------------|
-|withdrawId | the withdraw request id, a unique id |
-|hash       | the digest of user's signature       |
-
-## **Withdraw by API [evm] [futures]**
-
-request:
-
-```shell
-curl --location --request POST 'https://fapi.asterdex.com/fapi/aster/user-withdraw?chainId=56&asset=USDT&amount=31&fee=0.3&receiver=0x000ae314e2a2172a039b26378814c252734f556a&nonce=1761210000000000&userSignature=0xde4ca529eef20db136eed1daf1d072083431d5279e6d6e219600cf57161c5e6d1232af3c8a8ef37ba8b5963f439ef9cc2b475fe18dcc3732dda9fb93c94a3abd1c&recvWindow=60000&timestamp=1761230958410&signature=f5fd60da19be213d58914dd6f46bc400ada610fb916998dfc01dd346bfdad512' \
---header 'Content-Type: application/json' \
---header 'X-MBX-APIKEY: Your API KEY'
-```
-
-params:
-
-| param         | type   | required | description                                               |
-|---------------|--------|----------|-----------------------------------------------------------|
-| amount        | string | true     | Withdraw amount in token unit                             |
-| chainId       | int    | true     | Chain ID                                                  |
-| asset         | string | true     | Currency name, e.g., ASTER                                |
-| fee           | string | true     | Withdraw fee in token unit                                |
-| nonce         | string | true     | Unique number, should be the save in signature            |
-| receiver      | string | true     | Withdraw receipt address, should be the save in signature |
-| userSignature | string | true    | EIP712 signature                                         |
-|timestamp|int| true| Current timestamp in milliseconds|
-|recvWindow|int| false| The number of milliseconds after timestamp the request is valid for|
-|signature|string| true| HMAC SHA256 signature of the request|
-
-response:
-
-```json
-{
-    "withdrawId": "1234567",
-    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
-}
-```
-
-|field      | desc                                 |
-|-----------|--------------------------------------|
-|withdrawId | the withdraw request id, a unique id |
-|hash       | the digest of user's signature       |
-
-## **Withdraw by API [evm] [spot]**
-
-request:
-
-```shell
-curl --location --request POST 'https://sapi.asterdex.com/api/v1/aster/user-withdraw?chainId=56&asset=ASTER&amount=1&fee=0.095&receiver=0x000ae314e2a2172a039b26378814c252734f556a&nonce=1761222960000000&userSignature=0x39051cc68de0fefb8e823259d3f7014fc787a8008b65d2a89d70defc48c3f91b35a4a819718c22ffcaeb143c8e1735621a0768d7c69e45ad8fbcf9bd315988423b&recvWindow=60000&timestamp=1761230958410&signature=f5fd60da19be213d58914dd6f46bc400ada610fb916998dfc01dd346bfdad51' \
---header 'Content-Type: application/json' \
---header 'X-MBX-APIKEY: Your API KEY'
-```
-
-params:
-
-| param         | type   | required | description                                               |
-|---------------|--------|----------|-----------------------------------------------------------|
-| amount        | string | true     | Withdraw amount in token unit                             |
-| chainId       | int    | true     | Chain ID                                                  |
-| asset         | string | true     | Currency name, e.g., ASTER                                |
-| fee           | string | true     | Withdraw fee in token unit                                |
-| nonce         | string | true     | Unique number, should be the save in signature            |
-| receiver      | string | true     | Withdraw receipt address, should be the save in signature |
-| userSignature | string | true    | EIP712 signature                                         |
-|timestamp|int| true| Current timestamp in milliseconds|
-|recvWindow|int| false| The number of milliseconds after timestamp the request is valid for|
-|signature|string| true| HMAC SHA256 signature of the request|
-
-response:
+响应：
 
 ```json
 {
@@ -314,35 +413,34 @@ response:
 }
 ```
 
-|field      | desc                                 |
-|-----------|--------------------------------------|
-|withdrawId | the withdraw request id, a unique id |
-|hash       | the digest of user's signature       |
+| 字段       | 说明               |
+|------------|--------------------|
+| withdrawId | 提现请求 ID，唯一值 |
+| hash       | 用户签名的摘要     |
 
-## **Withdraw by API [solana] [futures]**
+### 通过 API 提现 \[evm\] \[spot\]
 
-request:
+请求：
 
 ```shell
-curl --location --request POST 'https://fapi.asterdex.com/fapi/aster/user-solana-withdraw?chainId=101&asset=USDT&amount=3&fee=0.6&receiver=4wTV1YmiEkRvAtNtsSGPtUrqRYQMe5SKy2uB4Jjaxnjf&recvWindow=60000&timestamp=1762440135477&signature=a773a7e83c2fe4581eb2dc0500000faa3138173ba6262316c0d83b3498dea319' \
---header 'Content-Type: application/json' \
---header 'X-MBX-APIKEY: Your API KEY'
+curl --location --request POST 'https://sapi.asterdex.com/api/v1/aster/user-withdraw?chainId=56&asset=ASTER&amount=1&fee=0.095&receiver=0x000ae314e2a2172a039b26378814c252734f556a&nonce=1761222960000000&userSignature=0x39051cc68de0fefb8e823259d3f7014fc787a8008b65d2a89d70defc48c3f91b35a4a819718c22ffcaeb143c8e1735621a0768d7c69e45ad8fbcf9bd315988423b' \
+  --header 'Content-Type: application/json' \
+  --header 'X-MBX-APIKEY: Your API KEY'
 ```
 
-params:
+参数：
 
-| param         | type   | required | description                                               |
-|---------------|--------|----------|-----------------------------------------------------------|
-| amount        | string | true     | Withdraw amount in token unit                             |
-| chainId       | int    | true     | fix value 101                                                  |
-| asset         | string | true     | Currency name, e.g., USDT                                |
-| fee           | string | true     | Withdraw fee in token unit                                |
-| receiver      | string | true     | Withdraw receipt address, should be the save in signature |
-|timestamp|int| true| Current timestamp in milliseconds|
-|recvWindow|int| false| The number of milliseconds after timestamp the request is valid for|
-|signature|string| true| HMAC SHA256 signature of the request|
+| 参数          | 类型   | 必填 | 说明                               |
+|---------------|--------|------|------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）               |
+| chainId       | int    | 是   | 链 ID                              |
+| asset         | string | 是   | 币种名称，如 ASTER                 |
+| fee           | string | 是   | 提现手续费（代币单位）             |
+| nonce         | string | 是   | 唯一数值，需与签名中的值一致       |
+| receiver      | string | 是   | 提现收款地址，需与签名中的值一致   |
+| userSignature | string | 是   | EIP712 签名                        |
 
-response:
+响应：
 
 ```json
 {
@@ -350,32 +448,35 @@ response:
     "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
 }
 ```
-- hash is not the transaction hash, just a unique value
 
-## **Withdraw by API [solana] [spot]**
+| 字段       | 说明               |
+|------------|--------------------|
+| withdrawId | 提现请求 ID，唯一值 |
+| hash       | 用户签名的摘要     |
 
-request:
+### 通过 fapi 提现 \[solana\] \[futures\]
+
+请求：
 
 ```shell
-curl --location --request POST 'https://sapi.asterdex.com/api/v1/aster/user-solana-withdraw?chainId=101&asset=USDT&amount=0.97&fee=0.5&receiver=BzsJhmtg2UtQWNw6764DkK5Y4GPjc1XMzRqAGqSziymK&recvWindow=60000&timestamp=1764663883270&signature=d2fbaef40388208b47e0326fafc50798206f5b198762110ce1bf8879b5d9da22' \
---header 'Content-Type: application/json' \
---header 'X-MBX-APIKEY: Your API KEY'
+curl --location --request POST 'https://fapi.asterdex.com/fapi/aster/user-solana-withdraw?chainId=101&asset=USDT&amount=3&fee=0.6&receiver=4wTV1YmiEkRvAtNtsSGPtUrqRYQMe5SKy2uB4Jjaxnjf&userNonce=1773741793787000&userSignature=51pM5A46n5NzHYTtuzB7gh8FFfbkh4Aij1fceCZV2NtkiVvE7DADMnSvXFiUJvauKawdWaCfPhzCTVfXYcf1iteQ' \
+  --header 'Content-Type: application/json' \
+  --header 'X-MBX-APIKEY: Your API KEY'
 ```
 
-params:
+参数：
 
-| param         | type   | required | description                                               |
-|---------------|--------|----------|-----------------------------------------------------------|
-| amount        | string | true     | Withdraw amount in token unit                             |
-| chainId       | int    | true     | fix value 101                                                  |
-| asset         | string | true     | Currency name, e.g., USDT                                |
-| fee           | string | true     | Withdraw fee in token unit                                |
-| receiver      | string | true     | Withdraw receipt address, should be the save in signature |
-|timestamp|int| true| Current timestamp in milliseconds|
-|recvWindow|int| false| The number of milliseconds after timestamp the request is valid for|
-|signature|string| true| HMAC SHA256 signature of the request|
+| 参数          | 类型   | 必填 | 说明                                                                 |
+|---------------|--------|------|----------------------------------------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）                                                 |
+| chainId       | int    | 是   | 固定值：`101`                                                        |
+| asset         | string | 是   | 币种名称，如 USDT                                                    |
+| fee           | string | 是   | 提现手续费（代币单位）                                               |
+| receiver      | string | 是   | 提现收款地址                                                         |
+| userNonce     | string | 否   | 纳秒级时间戳，需与签名中的值一致。目前非必填，但强烈建议携带         |
+| userSignature | string | 否   | Base58 编码的 Ed25519 提现签名。目前非必填，但强烈建议携带           |
 
-response:
+响应：
 
 ```json
 {
@@ -383,4 +484,180 @@ response:
     "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
 }
 ```
-- hash is not the transaction hash, just a unique value
+
+> 注意：`hash` 不是交易哈希，仅为唯一标识符。
+
+### 通过 API 提现 \[solana\] \[spot\]
+
+请求：
+
+```shell
+curl --location --request POST 'https://sapi.asterdex.com/api/v1/aster/user-solana-withdraw?chainId=101&asset=USDT&amount=0.97&fee=0.5&receiver=BzsJhmtg2UtQWNw6764DkK5Y4GPjc1XMzRqAGqSziymK&userNonce=1773741793787000&userSignature=51pM5A46n5NzHYTtuzB7gh8FFfbkh4Aij1fceCZV2NtkiVvE7DADMnSvXFiUJvauKawdWaCfPhzCTVfXYcf1iteQ' \
+  --header 'Content-Type: application/json' \
+  --header 'X-MBX-APIKEY: Your API KEY'
+```
+
+参数：
+
+| 参数          | 类型   | 必填 | 说明                                                                 |
+|---------------|--------|------|----------------------------------------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）                                                 |
+| chainId       | int    | 是   | 固定值：`101`                                                        |
+| asset         | string | 是   | 币种名称，如 USDT                                                    |
+| fee           | string | 是   | 提现手续费（代币单位）                                               |
+| receiver      | string | 是   | 提现收款地址                                                         |
+| userNonce     | string | 否   | 纳秒级时间戳，需与签名中的值一致。目前非必填，但强烈建议携带         |
+| userSignature | string | 否   | Base58 编码的 Ed25519 提现签名。目前非必填，但强烈建议携带           |
+
+响应：
+
+```json
+{
+    "withdrawId": "1234567",
+    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
+}
+```
+
+> 注意：`hash` 不是交易哈希，仅为唯一标识符。
+
+### 通过 fapi\[v3\] 提现 \[evm\] \[futures\]
+
+* 注意：请参照 [Pro API-KEY 签名（V3）](#pro-api-key-签名v3) 说明生成请求签名，以下示例仅包含该接口特有参数。
+
+请求：
+
+```shell
+curl --location --request POST 'https://fapi.asterdex.com/fapi/v3/aster/user-withdraw?chainId=56&asset=USDT&amount=31&fee=0.3&receiver=0x000ae314e2a2172a039b26378814c252734f556a&userNonce=1761210000000000&userSignature=0xde4ca529eef20db136eed1daf1d072083431d5279e6d6e219600cf57161c5e6d1232af3c8a8ef37ba8b5963f439ef9cc2b475fe18dcc3732dda9fb93c94a3abd1c' \
+  --header 'Content-Type: application/json'
+```
+
+参数：
+
+| 参数          | 类型   | 必填 | 说明                                                                     |
+|---------------|--------|------|--------------------------------------------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）                                                     |
+| chainId       | int    | 是   | 链 ID                                                                    |
+| asset         | string | 是   | 币种名称，如 ASTER                                                       |
+| fee           | string | 是   | 提现手续费（代币单位）                                                   |
+| userNonce     | string | 是   | EVM 提现签名的纳秒级时间戳；与 V3 API `nonce` 相互独立，允许相差 1 小时以内 |
+| receiver      | string | 是   | 提现收款地址，需与签名中的值一致                                         |
+| userSignature | string | 是   | EIP712 提现签名                                                          |
+
+响应：
+
+```json
+{
+    "withdrawId": "1234567",
+    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
+}
+```
+
+| 字段       | 说明               |
+|------------|--------------------|
+| withdrawId | 提现请求 ID，唯一值 |
+| hash       | 用户签名的摘要     |
+
+### 通过 fapi\[v3\] 提现 \[solana\] \[futures\]
+
+* 注意：请参照 [Pro API-KEY 签名（V3）](#pro-api-key-签名v3) 说明生成请求签名，以下示例仅包含该接口特有参数。
+
+请求：
+
+```shell
+curl --location --request POST 'https://fapi.asterdex.com/fapi/v3/aster/user-solana-withdraw?chainId=101&asset=USDT&amount=3&fee=0.6&receiver=4wTV1YmiEkRvAtNtsSGPtUrqRYQMe5SKy2uB4Jjaxnjf&userNonce=1773741793787000&userSignature=51pM5A46n5NzHYTtuzB7gh8FFfbkh4Aij1fceCZV2NtkiVvE7DADMnSvXFiUJvauKawdWaCfPhzCTVfXYcf1iteQ' \
+  --header 'Content-Type: application/json'
+```
+
+参数：
+
+| 参数          | 类型   | 必填 | 说明                                                                              |
+|---------------|--------|------|-----------------------------------------------------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）                                                              |
+| chainId       | int    | 是   | 固定值：`101`                                                                     |
+| asset         | string | 是   | 币种名称，如 USDT                                                                 |
+| fee           | string | 是   | 提现手续费（代币单位）                                                            |
+| receiver      | string | 是   | 提现收款地址                                                                      |
+| userNonce     | string | 否   | Solana 提现签名的纳秒级时间戳；与 V3 API `nonce` 相互独立。目前非必填，但强烈建议携带 |
+| userSignature | string | 否   | Base58 编码的 Ed25519 提现签名。目前非必填，但强烈建议携带                        |
+
+响应：
+
+```json
+{
+    "withdrawId": "1234567",
+    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
+}
+```
+
+> 注意：`hash` 不是交易哈希，仅为唯一标识符。
+
+### 通过 fapi\[v3\] 提现 \[evm\] \[spot\]
+
+* 注意：请参照 [Pro API-KEY 签名（V3）](#pro-api-key-签名v3) 说明生成请求签名，以下示例仅包含该接口特有参数。
+
+请求：
+
+```shell
+curl --location --request POST 'https://sapi.asterdex.com/api/v3/aster/user-withdraw?chainId=56&asset=USDT&amount=31&fee=0.3&receiver=0x000ae314e2a2172a039b26378814c252734f556a&userNonce=1761210000000000&userSignature=0xde4ca529eef20db136eed1daf1d072083431d5279e6d6e219600cf57161c5e6d1232af3c8a8ef37ba8b5963f439ef9cc2b475fe18dcc3732dda9fb93c94a3abd1c' \
+  --header 'Content-Type: application/json'
+```
+
+参数：
+
+| 参数          | 类型   | 必填 | 说明                                                                     |
+|---------------|--------|------|--------------------------------------------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）                                                     |
+| chainId       | int    | 是   | 链 ID                                                                    |
+| asset         | string | 是   | 币种名称，如 ASTER                                                       |
+| fee           | string | 是   | 提现手续费（代币单位）                                                   |
+| userNonce     | string | 是   | EVM 提现签名的纳秒级时间戳；与 V3 API `nonce` 相互独立，允许相差 1 小时以内 |
+| receiver      | string | 是   | 提现收款地址，需与签名中的值一致                                         |
+| userSignature | string | 是   | EIP712 提现签名                                                          |
+
+响应：
+
+```json
+{
+    "withdrawId": "1234567",
+    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
+}
+```
+
+| 字段       | 说明               |
+|------------|--------------------|
+| withdrawId | 提现请求 ID，唯一值 |
+| hash       | 用户签名的摘要     |
+
+### 通过 fapi\[v3\] 提现 \[solana\] \[spot\]
+
+* 注意：请参照 [Pro API-KEY 签名（V3）](#pro-api-key-签名v3) 说明生成请求签名，以下示例仅包含该接口特有参数。
+
+请求：
+
+```shell
+curl --location --request POST 'https://sapi.asterdex.com/api/v3/aster/user-solana-withdraw?chainId=101&asset=USDT&amount=0.97&fee=0.5&receiver=BzsJhmtg2UtQWNw6764DkK5Y4GPjc1XMzRqAGqSziymK&userNonce=1773741793787000&userSignature=51pM5A46n5NzHYTtuzB7gh8FFfbkh4Aij1fceCZV2NtkiVvE7DADMnSvXFiUJvauKawdWaCfPhzCTVfXYcf1iteQ' \
+  --header 'Content-Type: application/json'
+```
+
+参数：
+
+| 参数          | 类型   | 必填 | 说明                                                                              |
+|---------------|--------|------|-----------------------------------------------------------------------------------|
+| amount        | string | 是   | 提现数量（代币单位）                                                              |
+| chainId       | int    | 是   | 固定值：`101`                                                                     |
+| asset         | string | 是   | 币种名称，如 USDT                                                                 |
+| fee           | string | 是   | 提现手续费（代币单位）                                                            |
+| receiver      | string | 是   | 提现收款地址                                                                      |
+| userNonce     | string | 否   | Solana 提现签名的纳秒级时间戳；与 V3 API `nonce` 相互独立。目前非必填，但强烈建议携带 |
+| userSignature | string | 否   | Base58 编码的 Ed25519 提现签名。目前非必填，但强烈建议携带                        |
+
+响应：
+
+```json
+{
+    "withdrawId": "1234567",
+    "hash": "0x9a40f0119b670fb6b155744b51981f91c4c4c8a20c333441a63853fe7d055c90"
+}
+```
+
+> 注意：`hash` 不是交易哈希，仅为唯一标识符。
