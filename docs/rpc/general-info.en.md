@@ -1,12 +1,3 @@
-- [General Info](#general-info)
-  - [General API Information](#general-api-information)
-- [Chain RPC Endpoints](#chain-rpc-endpoints)
-  - [Get Balance](#get-balance)
-  - [Get Open Orders](#get-open-orders)
-  - [Get User Fills](#get-user-fills)
-
-## **General Info**
-
 ## General API Information
 
 * All endpoints use JSON-RPC 2.0 protocol via HTTP POST.
