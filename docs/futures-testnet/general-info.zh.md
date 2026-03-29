@@ -83,7 +83,7 @@
 | TRADE | 需要有效的 signer 和 signature |
 | USER_DATA | 需要有效的 signer 和 signature |
 | USER_STREAM | 需要有效的 signer 和 signature |
-| MARKET_DATA | 需要有效的 signer 和 signature |
+| MARKET_DATA | 不需要鉴权的接口 |
 
 ## 鉴权签名载荷
 
@@ -96,11 +96,7 @@
 
 ## 需要签名的接口
 
-* 鉴权类型：TRADE、USER_DATA、USER_STREAM、MARKET_DATA
-* 将接口参数转换为字符串后，按照 key 值的 ASCII 顺序排序生成最终字符串。注意：签名过程中所有参数值均需以字符串形式处理。
-* 生成字符串后，将其与鉴权签名参数 user、signer 和 nonce 结合，使用 Web3 的 ABI 参数编码生成字节码。
-* 使用 Keccak 算法对字节码生成哈希值。
-* 使用 **API 钱包地址**的私钥，通过 Web3 的 ECDSA 签名算法对哈希值进行签名，生成最终 signature。
+* 鉴权类型：TRADE、USER_DATA、USER_STREAM
 
 ## POST /fapi/v3/order 的示例
 
@@ -132,6 +128,14 @@ long microsecond = now.getEpochSecond() * 1000000 + now.getNano() / 1000;
 #### 示例：以下为业务请求参数
 
 ```python
+import json
+import time
+import urllib
+import threading
+
+import requests
+from eth_account.messages import  encode_structured_data
+from eth_account import Account
 
 typed_data = {
   "types": {
@@ -155,384 +159,90 @@ typed_data = {
   "message": {
     "msg": "$msg"
   }
-}           
-```
+}
 
-#### 示例：通过 query string 发送（以 Python 为例）
+headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'User-Agent': 'PythonApp/1.0'
+}
+host = 'https://fapi.asterdex-testnet.com'
 
-> **方式一：通过 query string**
+# 在此配置您的用户和代理信息
+user = '*'
+signer = '*'
+private_key = '*'
 
-```python
-import random
-import time
+place_order = {"url":"/fapi/v3/order","method":"POST","params":{"symbol": "ASTERUSDT", "type": "LIMIT", "side": "BUY",
+                  "timeInForce": "GTC", "quantity": "20", "price": "0.5"}}
+batch_orders = {"url":"/fapi/v3/batchOrders","method":"POST","params":{
+          "batchOrders":"[{'symbol':'ASTERUSDT','type':'LIMIT','side':'BUY','timeInForce':'GTC','quantity':'20','price':'0.5'},{'symbol':'ASTERUSDT','type':'LIMIT','side':'BUY','timeInForce':'GTC','quantity':'20','price':'0.5'}]" }}
+listen_key = {"url":"/fapi/v3/listenKey","method":"POST","params":{}}
 
-import requests
-from eth_account.messages import encode_typed_data
-from eth_account import Account
+_last_ms = 0
+_i = 0
+_nonce_lock = threading.Lock()
 
-from eip712 import typed_data
+def get_nonce():
+    global _last_ms, _i
+    with _nonce_lock:
+        now_ms = int(time.time())
 
+        if now_ms == _last_ms:
+            _i += 1
+        else:
+            _last_ms = now_ms
+            _i = 0
 
-def get_url(my_dict) -> str:
-       return '&'.join(f'{key}={str(value)}'for key, value in my_dict.items())
+        return now_ms * 1_000_000 + _i
 
-def send_by_url() :
-    import random
-    import time
+def send_by_url(api) :
+    my_dict = api['params']
+    url = host + api['url']
 
-    import requests
-    from eth_account.messages import encode_typed_data
-    from eth_account import Account
+    my_dict['nonce'] = str(get_nonce())
+    my_dict['user'] = user
+    my_dict['signer'] = signer
 
-    test_net_end_point = 'https://fapi.asterdex-testnet.com/fapi/v3/order'
-    param = 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=9000&timeInForce=GTC'
+    param = urllib.parse.urlencode(my_dict)
 
-    nonce = int(time.time()) * 1_000_000 + random.randint(0, 999999)
-    param += '&nonce=' + str(nonce)
-    param += '&user=' + '0x63DD5aCC6b1aa0f563956C0e534DD30B6dcF7C4e'
-    param += '&signer=' + '0xbEf084ad26b44F002C3b55DB3bf7241003dABdab'
-
+    print(param)
     typed_data['message']['msg'] = param
-
-    message = encode_typed_data(full_message=typed_data)
-
-    private_key = "*"
+    message = encode_structured_data(typed_data)
     signed = Account.sign_message(message, private_key=private_key)
-    print(signed.signature.hex())
 
-    url = test_net_end_point + '?' + param + '&signature=' + signed.signature.hex()
-
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'PythonApp/1.0'
-    }
+    url = url + '?' + param + '&signature=' + signed.signature.hex()
     print(url)
     res = requests.post(url, headers=headers)
-
     print(res.text)
 
-if __name__ == '__main__':
-    send_by_url()
+def send_by_body(api) :
+       my_dict = api['params']
+       url = host +api['url']
+       my_dict['nonce'] = str(get_nonce())
+       my_dict['user'] = user
+       my_dict['signer'] = signer
 
+       param = urllib.parse.urlencode(my_dict)
+       typed_data['message']['msg'] = param
+       message = encode_structured_data(typed_data)
 
-```
-
-> **方式二：通过 request body**
-
-```python
-import random
-import time
-
-import requests
-from eth_account.messages import encode_typed_data
-from eth_account import Account
-
-from eip712 import typed_data
-
-
-def get_url(my_dict) -> str:
-       return '&'.join(f'{key}={str(value)}'for key, value in my_dict.items())
-
-def send_by_body() :
-       my_dict = {"symbol": "BTCUSDT", "positionSide": "BOTH", "type": "LIMIT", "side": "BUY",
-                  "timeInForce": "GTC", "quantity": "0.01", "price": "81000"}
-
-       test_net_end_point = 'https://fapi.asterdex-testnet.com/fapi/v3/order'
-
-       nonce = int(time.time()) * 1_000_000 + random.randint(0, 999999)
-       my_dict['nonce'] = str(nonce)
-       my_dict['user'] = '0x63DD5aCC6b1aa0f563956C0e534DD30B6dcF7C4e'
-       my_dict['signer'] = '0xbEf084ad26b44F002C3b55DB3bf7241003dABdab'
-
-       content = get_url(my_dict)
-
-       typed_data['message']['msg'] = content
-
-       message = encode_typed_data(full_message=typed_data)
-
-       private_key = "*"
        signed = Account.sign_message(message, private_key=private_key)
        print(signed.signature.hex())
 
        my_dict['signature'] = signed.signature.hex()
 
-       headers = {
-           'Content-Type': 'application/x-www-form-urlencoded',
-           'User-Agent': 'PythonApp/1.0'
-       }
        print(my_dict)
-       res = requests.post(test_net_end_point, data=my_dict, headers=headers)
-
+       res = requests.post(url, data=my_dict, headers=headers)
+       # print(res.headers)
        print(res.text)
 
 if __name__ == '__main__':
-    send_by_body()
+    send_by_url(place_order)
+    # send_by_url(listen_key)
+    # send_by_url(batch_orders)
+    # send_by_body(place_order)
+    # send_by_body(batch_orders)
+
 ```
 
-## 公开API参数
 
-### 术语解释
-
-* `base asset` 指一个交易对的交易对象，即写在靠前部分的资产名，比如 `BTCUSDT` 中的 `BTC`。
-* `quote asset` 指一个交易对的定价资产，即写在靠后部分的资产名，比如 `BTCUSDT` 中的 `USDT`。
-
-### 枚举定义
-
-**交易对类型:**
-
-* FUTURE
-
-**合约类型 (contractType):**
-
-* PERPETUAL
-
-**合约状态 (contractStatus, status):**
-
-* PENDING_TRADING
-* TRADING
-* PRE_SETTLE
-* SETTLING
-* CLOSE
-
-**订单状态 (status):**
-
-* NEW
-* PARTIALLY_FILLED
-* FILLED
-* CANCELED
-* REJECTED
-* EXPIRED
-
-**订单种类 (orderTypes, type):**
-
-* LIMIT
-* MARKET
-* STOP
-* STOP_MARKET
-* TAKE_PROFIT
-* TAKE_PROFIT_MARKET
-* TRAILING_STOP_MARKET
-
-**订单方向 (side):**
-
-* BUY
-* SELL
-
-**持仓方向 (positionSide):**
-
-* BOTH
-* LONG
-* SHORT
-
-**有效方式 (timeInForce):**
-
-* GTC - 成交为止
-* IOC - 无法立即成交的部分就撤销
-* FOK - 无法全部立即成交就撤销
-* GTX - 无法成为挂单方就撤销（Post Only）
-* HIDDEN - HIDDEN 该类型订单在订单簿里不可见
-
-**条件价格触发类型 (workingType):**
-
-* MARK_PRICE
-* CONTRACT_PRICE
-
-**响应类型 (newOrderRespType):**
-
-* ACK
-* RESULT
-
-**K线间隔:**
-
-m -> 分钟; h -> 小时; d -> 天; w -> 周; M -> 月
-
-* 1m
-* 3m
-* 5m
-* 15m
-* 30m
-* 1h
-* 2h
-* 4h
-* 6h
-* 8h
-* 12h
-* 1d
-* 3d
-* 1w
-* 1M
-
-**限制类型 (rateLimitType):**
-
-> REQUEST_WEIGHT
-
-```javascript
-{
-  	"rateLimitType": "REQUEST_WEIGHT",
-  	"interval": "MINUTE",
-  	"intervalNum": 1,
-  	"limit": 2400
-  }
-```
-
-> ORDERS
-
-```javascript
-{
-  	"rateLimitType": "ORDERS",
-  	"interval": "MINUTE",
-  	"intervalNum": 1,
-  	"limit": 1200
-   }
-```
-
-* REQUEST_WEIGHT
-* ORDERS
-
-**限制间隔 (interval):**
-
-* MINUTE
-
-## 过滤器
-
-过滤器，即 Filter，定义某个交易对或整个 exchange 上各种交易规则。
-
-### 交易对过滤器
-
-#### PRICE_FILTER 价格过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "PRICE_FILTER",
-    "minPrice": "0.00000100",
-    "maxPrice": "100000.00000000",
-    "tickSize": "0.00000100"
-  }
-```
-
-`PRICE_FILTER` 定义某个交易对的 `price` 字段的合法范围，由三部分组成：
-
-* `minPrice` 定义 `price`/`stopPrice` 允许的最小值；当值为 0 时，该规则失效。
-* `maxPrice` 定义 `price`/`stopPrice` 允许的最大值；当值为 0 时，该规则失效。
-* `tickSize` 定义 `price`/`stopPrice` 的步进间隔；当值为 0 时，该规则失效。
-
-以上任意变量可设为 0，表示该条规则不生效。价格/停止价格需满足以下条件（已启用的规则）：
-
-* `price` >= `minPrice`
-* `price` <= `maxPrice`
-* (`price`-`minPrice`) % `tickSize` == 0
-
-#### LOT_SIZE 订单尺寸过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "LOT_SIZE",
-    "minQty": "0.00100000",
-    "maxQty": "100000.00000000",
-    "stepSize": "0.00100000"
-  }
-```
-
-`LOT_SIZE` 过滤器对订单中的 `quantity` 字段进行限制，由三部分组成：
-
-* `minQty` 表示 `quantity` 允许的最小值。
-* `maxQty` 表示 `quantity` 允许的最大值。
-* `stepSize` 表示 `quantity` 允许的步进值。
-
-`quantity` 需满足以下条件：
-
-* `quantity` >= `minQty`
-* `quantity` <= `maxQty`
-* (`quantity`-`minQty`) % `stepSize` == 0
-
-#### MARKET_LOT_SIZE 市价订单尺寸过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "MARKET_LOT_SIZE",
-    "minQty": "0.00100000",
-    "maxQty": "100000.00000000",
-    "stepSize": "0.00100000"
-  }
-```
-
-`MARKET_LOT_SIZE` 过滤器对市价订单中的 `quantity` 字段进行限制，规则同 `LOT_SIZE`。
-
-`quantity` 需满足以下条件：
-
-* `quantity` >= `minQty`
-* `quantity` <= `maxQty`
-* (`quantity`-`minQty`) % `stepSize` == 0
-
-#### MAX_NUM_ORDERS 最大订单数过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "MAX_NUM_ORDERS",
-    "limit": 200
-  }
-```
-
-`MAX_NUM_ORDERS` 过滤器定义某个账户在一个交易对上允许挂单的最大数量。
-
-注意，普通订单和"algo"订单均计入此过滤器。
-
-#### MAX_NUM_ALGO_ORDERS 最大条件订单数过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "MAX_NUM_ALGO_ORDERS",
-    "limit": 100
-  }
-```
-
-`MAX_NUM_ALGO_ORDERS` 过滤器定义某账户在单个交易对上允许同时挂出所有类型条件单的最大数量。
-
-条件单类型包括：`STOP`、`STOP_MARKET`、`TAKE_PROFIT`、`TAKE_PROFIT_MARKET` 和 `TRAILING_STOP_MARKET`。
-
-#### PERCENT_PRICE 价格振幅过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "PERCENT_PRICE",
-    "multiplierUp": "1.1500",
-    "multiplierDown": "0.8500",
-    "multiplierDecimal": 4
-  }
-```
-
-`PERCENT_PRICE` 过滤器基于标记价格定义合法的价格范围。
-
-价格需满足以下条件：
-
-* 买单：`price` <= `markPrice` * `multiplierUp`
-* 卖单：`price` >= `markPrice` * `multiplierDown`
-
-#### MIN_NOTIONAL 最小名义价值过滤器
-
-> **/exchangeInfo 格式：**
-
-```javascript
-{
-    "filterType": "MIN_NOTIONAL",
-    "notional": "1"
-  }
-```
-
-`MIN_NOTIONAL` 过滤器定义某个交易对订单所允许的最小名义价值（成交额）。
-订单名义价值为 `price` * `quantity`。
-由于市价单没有价格，使用标记价格计算。
-
----

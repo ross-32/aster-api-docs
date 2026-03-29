@@ -867,7 +867,7 @@ GET /fapi/v3/balance
 
 
 ``
-GET /fapi/v3/account 
+GET /fapi/v3/accountWithJoinMargin 
 ``
 
 **权重:**

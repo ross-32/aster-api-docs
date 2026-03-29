@@ -815,7 +815,7 @@ Get all account orders; active, canceled, or filled.
 }
 ```
 
-``GET /fapi/v3/account (HMAC SHA256)``
+``GET /fapi/v3/accountWithJoinMargin (HMAC SHA256)``
 
 Get current account information.
 

@@ -6,6 +6,6 @@
 * The `blockTag` parameter accepts `"latest"` to query the most recent state.
 * All time-related fields are in milliseconds.
 
-> **Note:** The following endpoints only return data when the user has **privacy mode disabled**. If privacy mode is enabled, no data will be returned.
+> **Note:** In the Open Orders and Fills endpoints, account privacy enabled only applies to new orders placed after it is enabled; orders completed when account privacy is disabled remain visible as usual.
 
 ---

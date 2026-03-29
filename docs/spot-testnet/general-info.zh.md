@@ -126,6 +126,7 @@ long microsecond = now.getEpochSecond() * 1000000 + now.getNano() / 1000;
 
 ```python
 import time
+import threading
 import urllib
 
 import requests
@@ -171,18 +172,20 @@ place_order = {"url":"/api/v3/order","method":"POST","params":{"symbol": "ASTERU
                   "timeInForce": "GTC", "quantity": "100", "price": "0.4"}}
 _last_ms = 0
 _i = 0
+_nonce_lock = threading.Lock()
 
 def get_nonce():
     global _last_ms, _i
-    now_ms = int(time.time())
+    with _nonce_lock:
+        now_ms = int(time.time())
 
-    if now_ms == _last_ms:
-        _i += 1
-    else:
-        _last_ms = now_ms
-        _i = 0
+        if now_ms == _last_ms:
+            _i += 1
+        else:
+            _last_ms = now_ms
+            _i = 0
 
-    return now_ms * 1_000_000 + _i
+        return now_ms * 1_000_000 + _i
 
 def send_by_url(api) :
     my_dict = api['params']
@@ -291,6 +294,7 @@ Status | Description
 `IOC` | 无法立即成交的部分就撤销 <br> 订单在失效前会尽量多的成交。
 `FOK` | 无法全部立即成交就撤销 <br> 如果无法全部成交，订单会失效。
 `GTX` | 直到挂单成交 <br> 限价只挂单。
+`HIDDEN` | 该类型订单在订单薄里不可见
 
 **K线间隔:**
 

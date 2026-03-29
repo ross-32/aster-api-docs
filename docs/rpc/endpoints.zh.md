@@ -41,7 +41,7 @@ curl -X POST "https://tapi.asterdex.com/info" \
 {
   "result": {
     "address": "0x690931c*********",
-    "accountPrivy": "disabled",
+    "accountPrivacy": "disabled",
     "perpAssets": [
       {
         "asset": "USD1",
@@ -88,7 +88,7 @@ curl -X POST "https://tapi.asterdex.com/info" \
 字段名 | 类型 | 说明
 ------ | ---- | ----
 address | STRING | 钱包地址
-accountPrivy | STRING | 隐私模式状态：`"disabled"` 已关闭 / `"enabled"` 已开启
+accountPrivacy | STRING | 隐私模式状态：`"disabled"` 已关闭 / `"enabled"` 已开启
 perpAssets | ARRAY | 永续合约资产列表
 perpAssets[].asset | STRING | 资产名称
 perpAssets[].walletBalance | DECIMAL | 钱包余额
@@ -118,6 +118,8 @@ POST /info
 
 查询指定地址的所有当前挂单。
 
+> **说明：** 仅返回创建时间不早于 block 1 创世时间（`1772678119418`）的挂单，最多返回 **1000** 条。
+
 **方法名：** `aster_openOrders`
 
 **权重：**
@@ -128,7 +130,7 @@ POST /info
 下标 | 参数名 | 类型 | 是否必填 | 说明
 ---- | ------ | ---- | -------- | ----
 0 | address | STRING | 是 | 要查询的钱包地址
-1 | symbol | STRING | 否 | 交易对名称（如 `"BTCUSDT"`）；传入 `""` 查询所有交易对
+1 | symbol | STRING | 否 | 交易对名称（如 `"BTCUSDT"`）；传 `null` 或 `""` 查询所有交易对
 2 | blockTag | STRING | 是 | 区块标签，传入 `"latest"` 表示查询最新状态
 
 > **请求示例：**
@@ -155,7 +157,7 @@ curl -X POST "https://tapi.asterdex.com/info" \
 {
   "result": {
     "address": "0x690931c*********",
-    "accountPrivy": "disabled",
+    "accountPrivacy": "disabled",
     "openOrders": [
       {
         "orderId": "web_AD_7jz2xjo0ma4nblniq_98",
@@ -185,7 +187,7 @@ curl -X POST "https://tapi.asterdex.com/info" \
 字段名 | 类型 | 说明
 ------ | ---- | ----
 address | STRING | 钱包地址
-accountPrivy | STRING | 隐私模式状态：`"disabled"` 已关闭 / `"enabled"` 已开启
+accountPrivacy | STRING | 隐私模式状态：`"disabled"` 已关闭 / `"enabled"` 已开启
 openOrders | ARRAY | 当前挂单列表
 openOrders[].orderId | STRING | 订单 ID
 openOrders[].symbol | STRING | 交易对名称
@@ -213,12 +215,10 @@ POST /info
 下标 | 参数名 | 类型 | 是否必填 | 说明
 ---- | ------ | ---- | -------- | ----
 0 | address | STRING | 是 | 要查询的钱包地址
-1 | symbol | STRING | 是 | 交易对名称（如 `"BTCUSDT"`）
-2 | from | LONG | 是 | 查询起始时间（毫秒时间戳）
-3 | to | LONG | 是 | 查询结束时间（毫秒时间戳）
-4 | limit | INT | 是 | 每页返回条数，每次最多返回 `1000` 条
-5 | page | INT | 是 | 页码，从 `1` 开始
-6 | blockTag | STRING | 是 | 区块标签，传入 `"latest"` 表示查询最新状态
+1 | symbol | STRING | 否 | 交易对名称（如 `"BTCUSDT"`）；传 `null` 或 `""` 查询所有交易对
+2 | from | LONG | 否 | 查询起始时间（毫秒时间戳）。若不填且填了 `to`，则默认为 `to - 7天`；若两者均不填，则默认为当前时间往前 7 天。最小值为 `1772678119418`（block 1 创世时间），早于此时间的查询默认返回空。
+3 | to | LONG | 否 | 查询结束时间（毫秒时间戳）。若不填且填了 `from`，则默认为 `from + 7天`；若两者均不填，则默认为当前时间。`from` 与 `to` 时间间隔不得超过 7 天。
+4 | blockTag | STRING | 是 | 区块标签，传入 `"latest"` 表示查询最新状态
 
 > **请求示例：**
 
@@ -231,12 +231,10 @@ curl -X POST "https://tapi.asterdex.com/info" \
     "jsonrpc": "2.0",
     "method": "aster_userFills",
     "params": [
-      "0x690931c*********",
-      "BTCUSDT",
-      1772887745000,
-      1773146945000,
-      2,
-      1,
+      "0x1c3C4*************",
+      null,
+      null,
+      null,
       "latest"
     ]
   }'
@@ -247,24 +245,38 @@ curl -X POST "https://tapi.asterdex.com/info" \
 ```javascript
 {
   "result": {
-    "address": "0x690931c*********",
-    "accountPrivy": "disabled",
-    "startTime": 1772887745000,
-    "endTime": 1783146945000,
+    "address": "0x1c3C4*************",
+    "accountPrivacy": "disabled",
+    "startTime": 1773916057398,
+    "endTime": 1774520857398,
     "fills": [
       {
         "symbol": "BTCUSDT",
         "side": "BUY",
-        "price": "71087.9",
-        "qty": "0.00100000",
-        "time": 1773405618000
+        "price": "69999",
+        "qty": "0.001",
+        "time": 1774233564000
+      },
+      {
+        "symbol": "BTCUSDT",
+        "side": "SELL",
+        "price": "70658.6",
+        "qty": "0.001",
+        "time": 1774084612000
+      },
+      {
+        "symbol": "ETHUSDT",
+        "side": "BUY",
+        "price": "1971",
+        "qty": "0.013",
+        "time": 1774084518000
       },
       {
         "symbol": "BTCUSDT",
         "side": "BUY",
-        "price": "71088.1",
-        "qty": "0.00100000",
-        "time": 1773401493000
+        "price": "70676.7",
+        "qty": "0.001",
+        "time": 1774084489000
       }
     ]
   },
@@ -278,10 +290,10 @@ curl -X POST "https://tapi.asterdex.com/info" \
 字段名 | 类型 | 说明
 ------ | ---- | ----
 address | STRING | 钱包地址
-accountPrivy | STRING | 隐私模式状态：`"disabled"` 已关闭 / `"enabled"` 已开启
-startTime | LONG | 查询起始时间（毫秒时间戳）
-endTime | LONG | 查询结束时间（毫秒时间戳）
-fills | ARRAY | 成交记录列表
+accountPrivacy | STRING | 隐私模式状态：`"disabled"` 已关闭 / `"enabled"` 已开启
+startTime | LONG | 实际查询起始时间（毫秒时间戳）
+endTime | LONG | 实际查询结束时间（毫秒时间戳）
+fills | ARRAY | 成交记录列表，最多返回 `1000` 条
 fills[].symbol | STRING | 交易对名称
 fills[].side | STRING | 成交方向：`BUY` 买入 / `SELL` 卖出
 fills[].price | STRING | 成交价格
