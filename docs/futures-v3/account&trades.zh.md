@@ -1416,6 +1416,102 @@ GET /fapi/v3/commissionRate
 symbol | STRING | YES	
 
 
+## **更新用户MMP (USER_DATA)**
+
+> **响应:**
+
+```javascript
+true
+```
+
+``POST /fapi/v3/mmp``
+
+**权重:**
+1
+
+
+**参数:**
+
+名称  |  类型  | 是否必需 |  描述
+------------ | ------------ | ------------ | ------------
+symbol | STRING | YES	
+windowTimeInMilliseconds | LONG | YES | 计算qtyLimit、valueLimit、deltaLimit的时间窗口(单位ms)
+frozenTimeInMilliseconds | LONG | YES | 在frozenTimeInMilliseconds的时间内，禁止下MMP的订单
+qtyLimit | LONG | FALSE | 在windowTime内，累计成交的数量上限（不区分买卖），如在windowTime内到达了设置的qtyLimit，则触发frozenTimeInMilliseconds
+valueLimit | LONG | FALSE | 在windowTime内，累计成交的名义价值上限，如在windowTime内到达了设置的valueLimit，则触发frozenTimeInMilliseconds
+deltaLimit | LONG | FALSE | 在windowTime内，累计持仓变化上限（买卖对冲后），如在windowTime内到达了设置的deltaLimit，则触发frozenTimeInMilliseconds
+
+
+## **获取用户MMP (USER_DATA)**
+
+> **响应:**
+
+```javascript
+[
+	{
+		"symbol":"BTCUSDT",
+		"windowTimeInMilliseconds":5000,
+		"frozenTimeInMilliseconds":10000,
+		"qtyLimit":10,
+		"valueLimit":200000000,
+		"deltaLimit":100000000
+	}
+]
+```
+
+``GET /fapi/v3/mmp``
+
+**权重:**
+1
+
+
+**参数:**
+
+名称  |  类型  | 是否必需 |  描述
+------------ | ------------ | ------------ | ------------
+symbol | STRING | FALSE	
+
+
+## **删除用户MMP (USER_DATA)**
+
+> **响应:**
+
+```javascript
+true
+```
+
+``DELETE /fapi/v3/mmp``
+
+**权重:**
+1
+
+
+**参数:**
+
+名称  |  类型  | 是否必需 |  描述
+------------ | ------------ | ------------ | ------------
+symbol | STRING | YES	
+
+
+## **重置用户MMP (USER_DATA)**
+
+> **响应:**
+
+```javascript
+true
+```
+
+``POST /fapi/v3/mmpReset``
+
+**权重:**
+1
+
+
+**参数:**
+
+名称  |  类型  | 是否必需 |  描述
+------------ | ------------ | ------------ | ------------
+symbol | STRING | YES	
 
 
 
