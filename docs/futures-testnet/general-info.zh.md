@@ -37,6 +37,21 @@
 * `GET` 方法的接口，参数必须在 `query string` 中发送。
 * `POST`、`PUT` 和 `DELETE` 方法的接口，在 `request body` 中发送（content type `application/x-www-form-urlencoded`）。
 * 对参数的顺序不做要求。
+### V3 Nonce 机制
+
+* **Nonce** 用于校验请求的**有效性、唯一性和防重放**。客户端应使用**当前时间戳（微秒级）**作为 nonce，且与服务端时间误差不超过 **10 秒**。
+
+* 请求处理流程：
+
+  1. 若 nonce **已使用过** → 判定为**重复请求并拒绝**
+  2. 否则判断是否**过旧**
+
+* 为提升性能，每个用户仅维护**最近 100 个 nonce**：
+
+  * 若已满且新 nonce **小于当前最小值** → 判定为**过期并拒绝**
+  * 否则**移除最旧的 nonce**，加入新的
+
+* 总体效果：**防重复、防过期，仅保留近期有效请求**
 
 ## 访问限制
 
@@ -110,7 +125,7 @@
 | signer | 0x21cF8Ae13Bb72632562c6Fff438652Ba1a151bb0 | [点击此处](https://www.asterdex-testnet.com/en/api-wallet) |
 | privateKey | 0x4fd0a42218f3eae43a6ce26d22544e986139a01e5b34a62db53757ffca81bae1 | [点击此处](https://www.asterdex-testnet.com/en/api-wallet) |
 
-#### 示例：nonce 参数为当前系统微秒值，超过系统时间或落后系统时间超过 5 秒为非法请求。
+#### 示例：nonce 参数为当前系统微秒值，超过系统时间或落后系统时间超过 10 秒为非法请求。
 
 ```python
 #python

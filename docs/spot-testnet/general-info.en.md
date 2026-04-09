@@ -6,6 +6,22 @@
 ### Attention
 * TESTUSDT or any other symbols starting with TEST are symbols used for Aster’s INTERNAL TESTING ONLY. Please DO NOT trade on these symbols starting with TEST. Aster does not hold any accountability for loss of funds due to trading on these symbols. However, if you run into issues, you may contact support about this any time, we will try to help you recover your funds.
 
+### V3 Nonce Mechanism
+
+* **Nonce** is used to validate the **validity, uniqueness, and replay-protection** of requests. Clients should use the **current timestamp (microsecond precision)** as the nonce, and the difference from server time must not exceed **10 seconds**.
+
+* Request processing flow:
+
+  1. If the nonce **has already been used** → rejected as a **duplicate request**
+  2. Otherwise, the system checks whether it is **too old**
+
+* To improve performance, each user maintains only the **most recent 100 nonces**:
+
+  * If the list is full and the new nonce is **smaller than the current minimum** → rejected as **expired**
+  * Otherwise, the **oldest nonce is removed** and the new one is added
+
+* Overall effect: **prevents duplicates and stale requests, retaining only recent valid requests**
+
 ### HTTP return codes
 
 * HTTP `4XX` status codes are used to indicate errors in the request content, behavior, or format. The problem lies with the requester.  
