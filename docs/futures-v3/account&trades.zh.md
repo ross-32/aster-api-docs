@@ -1721,6 +1721,8 @@ symbol | STRING | YES
 | clientStrategyId | STRING | NO | 客户端自定义策略 ID |
 | strategyType | ENUM | YES | 策略类型：`OTO`、`OCO`、`OTOCO` |
 | subOrderList | JSON Array | YES | 子订单列表。`OTO` 和 `OCO` 恰好需要 2 个子订单；`OTOCO` 恰好需要 3 个 |
+| builder | STRING | NO | 构建者地址 |
+| feeRate | DECIMAL | NO | 自定义费率 |
 
 **`subOrderList` 中每个子订单的字段：**
 
