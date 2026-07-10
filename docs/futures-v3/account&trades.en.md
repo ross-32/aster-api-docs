@@ -590,6 +590,57 @@ Cancel an active order.
 
 Either `orderId` or `origClientOrderId` must be sent.
 
+## **Cancel Order (Guarded) (TRADE)**
+
+> **Response:**
+
+```javascript
+{
+ 	"clientOrderId": "myOrder1",
+ 	"cumQty": "0",
+ 	"cumQuote": "0",
+ 	"executedQty": "0",
+ 	"orderId": 283194212,
+ 	"origQty": "11",
+ 	"origType": "TRAILING_STOP_MARKET",
+  	"price": "0",
+  	"reduceOnly": false,
+  	"side": "BUY",
+  	"positionSide": "SHORT",
+  	"status": "CANCELED",
+  	"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET
+  	"closePosition": false,   // if Close-All
+  	"symbol": "BTCUSDT",
+  	"timeInForce": "GTC",
+  	"type": "TRAILING_STOP_MARKET",
+  	"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order
+  	"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order
+ 	"updateTime": 1571110484038,
+ 	"workingType": "CONTRACT_PRICE",
+ 	"priceProtect": false            // if conditional order trigger is protected
+}
+```
+
+``DELETE /fapi/v3/guardedCancelOrder ``
+
+Cancel an active order. Guarded variant of `DELETE /fapi/v3/order`, intended for orders placed/authorized on-chain: the on-chain nonce associated with the order is used to guard against duplicate or out-of-order cancellation. `signer`, `nonce`, and `signature` are required. Other request parameters and the response are identical to `DELETE /fapi/v3/order`.
+
+**Weight:**
+1
+
+**Parameters:**
+
+| Name              | Type   | Mandatory | Description |
+| ----------------- | ------ | --------- | ----------- |
+| symbol            | STRING | YES       |             |
+| orderId           | LONG   | NO        |             |
+| origClientOrderId | STRING | NO        |             |
+| signer            | STRING | YES       | API wallet address |
+| nonce             | LONG   | YES       | The `nonce` that was used to place this order (i.e. the `nonce` submitted with `POST /fapi/v3/order`), not a new/current timestamp |
+| signature         | STRING | YES       | EIP-712 signature signed with the `signer` wallet private key |
+
+Either `orderId` or `origClientOrderId` must be sent.
+
 ## **Cancel All Open Orders (TRADE)**
 
 > **Response:**
@@ -663,6 +714,63 @@ Either `orderId` or `origClientOrderId` must be sent.
 | origClientOrderIdList | LIST\ | NO        | max length 10 e.g. ["my_id_1","my_id_2"], encode the double quotes. No space after comma. |
 
 Either `orderIdList` or `origClientOrderIdList ` must be sent.
+
+## **Cancel Multiple Orders (Guarded) (TRADE)**
+
+> **Response:**
+
+```javascript
+[
+	{
+	 	"clientOrderId": "myOrder1",
+	 	"cumQty": "0",
+	 	"cumQuote": "0",
+	 	"executedQty": "0",
+	 	"orderId": 283194212,
+	 	"origQty": "11",
+	 	"origType": "TRAILING_STOP_MARKET",
+  		"price": "0",
+  		"reduceOnly": false,
+  		"side": "BUY",
+  		"positionSide": "SHORT",
+  		"status": "CANCELED",
+  		"stopPrice": "9300",				// please ignore when order type is TRAILING_STOP_MARKET
+  		"closePosition": false,   // if Close-All
+  		"symbol": "BTCUSDT",
+  		"timeInForce": "GTC",
+  		"type": "TRAILING_STOP_MARKET",
+  		"activatePrice": "9020",			// activation price, only return with TRAILING_STOP_MARKET order
+  		"priceRate": "0.3",					// callback rate, only return with TRAILING_STOP_MARKET order
+	 	"updateTime": 1571110484038,
+	 	"workingType": "CONTRACT_PRICE",
+	 	"priceProtect": false            // if conditional order trigger is protected
+	},
+	{
+		"code": -2011,
+		"msg": "Unknown order sent."
+	}
+]
+```
+
+``DELETE /fapi/v3/guardedBatchOrders ``
+
+Cancel multiple active orders. Guarded variant of `DELETE /fapi/v3/batchOrders`, intended for orders placed/authorized on-chain: the on-chain nonce associated with each order is used to guard against duplicate or out-of-order cancellation. `signer`, `nonce`, and `signature` are required. Other request parameters and the response are identical to `DELETE /fapi/v3/batchOrders`.
+
+**Weight:**
+1
+
+**Parameters:**
+
+| Name                  | Type           | Mandatory | Description                                                                                     |
+| --------------------- | -------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| symbol                | STRING         | YES       |                                                                                                 |
+| orderIdList           | LIST\<LONG\>   | NO        | max length 10 e.g. [1234567,2345678]                                                            |
+| origClientOrderIdList | LIST\<STRING\> | NO        | max length 10 e.g. ["my_id_1","my_id_2"], encode the double quotes. No space after comma.       |
+| signer                | STRING         | YES       | API wallet address |
+| nonce                 | LONG           | YES       | The `nonce` that was used to place these orders (i.e. the `nonce` submitted with `POST /fapi/v3/batchOrders`), not a new/current timestamp |
+| signature             | STRING         | YES       | EIP-712 signature signed with the `signer` wallet private key |
+
+Either `orderIdList` or `origClientOrderIdList` must be sent.
 
 ## **Auto-Cancel All Open Orders (TRADE)**
 
