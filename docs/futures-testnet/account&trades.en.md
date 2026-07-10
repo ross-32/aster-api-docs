@@ -1795,9 +1795,19 @@ subSourceAddr={subSourceAddr}&nonce={nonce}&user={user}&signer={signer}[&subAcco
 | kindType | ENUM | YES | Transfer direction (see table below) |
 | nonce | LONG | YES | Microsecond-level timestamp, used for replay attack prevention |
 | user | STRING | YES | Signing account wallet address (master account address in most cases; sub-account address when the sub-account initiates a transfer to the master account) |
-| signer | STRING | YES | Signer address associated with `user` |
 | fromAccountAddress | STRING | NO | Source wallet address. Required when the source account differs from `user` (e.g., sub→sub transfers or master→sub transfers initiated by a third party) |
 | signature | STRING | YES | Signature over the message body, **must be signed using the `user` account's wallet private key** (see Signature Instructions below) |
+
+
+**`Parameter Values`:**
+
+| Transfer | user | fromAccountAddress | toAccountAddress | signature |
+|------|------|------|------|------|
+| Master → Sub | Master account address | Master account address | Sub-account address | Signed with master account private key |
+| Sub → Master | Master account address | Sub-account address | Master account address | Signed with master account private key |
+| Sub → Sub | Master account address | Sub A address | Sub B address | Signed with master account private key |
+| Sub → Master | Sub-account address | Sub-account address | Master account address | Signed with sub-account private key |
+| Sub → Sub | Sub A address | Sub A address | Sub B address | Signed with sub-account private key |
 
 **`kindType` values:**
 

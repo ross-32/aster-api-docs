@@ -113,7 +113,7 @@ It is recommended to use a small recvWindow of 5000 or less!
 
 | Parameter | Description                        |
 | --------- | ---------------------------------- |
-| user      | Main account wallet address        |
+| user      | Master account wallet address      |
 | signer    | API wallet address                 |
 | nonce     | Current timestamp, in microseconds |
 | signature | Signature                          |

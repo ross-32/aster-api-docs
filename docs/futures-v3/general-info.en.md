@@ -102,7 +102,7 @@ It is strongly recommended to use websocket stream for getting data as much as p
 
 | Parameter | Description                        |
 | --------- | ---------------------------------- |
-| user      | Main account wallet address        |
+| user      | Master account wallet address      |
 | signer    | API wallet address                 |
 | nonce     | Current timestamp, in microseconds |
 | signature | Signature                          |
