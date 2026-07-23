@@ -2820,15 +2820,22 @@ typed_data = {
 > **响应:**
 
 ```javascript
-[
-  {
-    "userAddress": "0x1234...abcd",
-    "builderAddress": "0x5678...efgh",
-    "maxFeeRate": 0.0001,
-    "builderName": "MyBuilder",
-    "approveTime": 1768903037082
-  }
-]
+{
+  "rows": [
+    {
+      "userAddress": "0x1234...abcd",
+      "builderAddress": "0x5678...efgh",
+      "maxFeeRate": 0.0001,
+      "builderName": "MyBuilder",
+      "approveTime": 1768903037082
+    }
+  ],
+  "total": 1,
+  "currentPage": 1,
+  "totalPages": 1,
+  "pageSize": 100,
+  "hasMore": false
+}
 ```
 
 `GET /fapi/v3/builder/approvedUserList`
@@ -2842,19 +2849,28 @@ typed_data = {
 | 名称 | 类型 | 是否必需 | 描述 |
 |------|------|---------|------|
 | startTime | LONG | NO | 仅返回该时间戳（毫秒）之后授权的用户。若不传，默认为 `0`，即不做时间过滤，返回全部已授权用户 |
+| endTime | LONG | NO | 仅返回该时间戳（毫秒）之前（含）授权的用户。若不传，默认为当前服务器时间 |
+| page | INT | NO | 页码，从 `1` 开始，默认为 `1` |
+| limit | INT | NO | 每页数量，默认为 `100`，最大为 `1000` |
 | nonce | LONG | YES | 微秒级时间戳，用于防重放攻击 |
 | signer | STRING | YES | 与当前认证账户关联的 signer 地址 |
 | signature | STRING | YES | 对请求体的签名 |
 
 * 以已认证账户本身作为Builder身份，无需单独传入`builder`地址参数。
-* 最多返回1000条记录。
+* 返回结果采用分页，可通过 `page` 与 `limit` 翻页获取完整结果集。
 
 **响应字段:**
 
 | 字段 | 类型 | 描述 |
 |------|------|------|
-| userAddress | STRING | 被授权用户的钱包地址 |
-| builderAddress | STRING | Builder的钱包地址 |
-| maxFeeRate | DECIMAL | 用户授权给该Builder的最大手续费率 |
-| builderName | STRING | 用户授权时设置的Builder名称 |
-| approveTime | LONG | 用户授权Builder的时间戳（毫秒） |
+| rows | ARRAY | 当前页的已授权用户记录列表 |
+| rows[].userAddress | STRING | 被授权用户的钱包地址 |
+| rows[].builderAddress | STRING | Builder的钱包地址 |
+| rows[].maxFeeRate | DECIMAL | 用户授权给该Builder的最大手续费率 |
+| rows[].builderName | STRING | 用户授权时设置的Builder名称 |
+| rows[].approveTime | LONG | 用户授权Builder的时间戳（毫秒） |
+| total | LONG | 符合条件的记录总数（所有页汇总） |
+| currentPage | INT | 当前页码 |
+| totalPages | INT | 总页数 |
+| pageSize | INT | 实际生效的每页数量 |
+| hasMore | BOOLEAN | 是否还有下一页 |
